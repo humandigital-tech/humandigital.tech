@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services &mdash; Human &amp; Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0f0f0f; --bg2:#161616; --bg3:#1e1e1e;
+  --border:rgba(255,255,255,0.08); --text:#f0f0f0;
+  --text-dim:#888; --text-sub:#555; --nav-bg:rgba(15,15,15,0.92);
+  --card-bg:#161616; --accent:#0066FF;
+  --accent-dim:rgba(0,102,255,0.12); --accent-border:rgba(0,102,255,0.3);
+  --green:#059669; --green-dim:rgba(5,150,105,0.1); --green-border:rgba(5,150,105,0.3);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes glowPulse{0%,100%{opacity:.07;}50%{opacity:.12;}}
+@keyframes navSlide{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
+@keyframes drawLine{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-delay-1{transition-delay:.08s;} .reveal-delay-2{transition-delay:.16s;}
+.reveal-delay-3{transition-delay:.24s;} .reveal-delay-4{transition-delay:.32s;}
+.reveal-delay-5{transition-delay:.40s;} .reveal-delay-6{transition-delay:.48s;}
+@media(prefers-reduced-motion:reduce){.reveal,.reveal.visible{opacity:1;transform:none;transition:none;}}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(16px);background:var(--nav-bg);border-bottom:1px solid var(--border);padding:0 48px;height:64px;display:flex;align-items:center;justify-content:space-between;animation:navSlide .5s ease both;}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-logo img{height:32px;width:auto;}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none;}
+.nav-links a{font-size:13px;font-weight:500;letter-spacing:.04em;color:var(--text-dim);text-decoration:none;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--text);}
+.nav-cta{background:var(--accent);color:#000!important;padding:8px 20px;border-radius:6px;font-weight:600!important;transition:opacity .2s!important;}
+.nav-cta:hover{opacity:.85;}
+
+/* SERVICE NAV */
+.service-nav{position:sticky;top:64px;z-index:90;background:var(--bg2);border-bottom:1px solid var(--border);padding:0 48px;display:flex;gap:0;overflow-x:auto;}
+.service-nav-link{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-sub);text-decoration:none;padding:16px 24px;border-bottom:2px solid transparent;white-space:nowrap;transition:color .2s,border-color .2s;}
+.service-nav-link:hover,.service-nav-link.active{color:var(--accent);border-bottom-color:var(--accent);}
+
+/* SHARED */
+.service-section{padding:80px 48px;border-bottom:1px solid var(--border);}
+.service-section.alt{background:var(--bg2);}
+.service-num{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.service-num::before{content:'';width:32px;height:1px;background:var(--accent);transform-origin:left;}
+.service-title{font-size:clamp(28px,4vw,52px);font-weight:700;letter-spacing:-.025em;line-height:1.06;margin-bottom:16px;}
+.service-title em{font-style:normal;color:var(--accent);}
+.service-tagline{font-size:clamp(15px,1.8vw,19px);font-weight:300;color:var(--text-dim);line-height:1.7;max-width:680px;margin-bottom:48px;}
+
+/* SERVICE LAYOUT */
+.service-layout{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;margin-bottom:48px;}
+.section-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
+.content-heading{font-size:18px;font-weight:700;margin-bottom:12px;letter-spacing:-.01em;}
+.content-body{font-size:14px;font-weight:300;color:var(--text-dim);line-height:1.75;}
+.content-body p{margin-bottom:12px;}
+.content-body p:last-child{margin-bottom:0;}
+
+/* METHODOLOGY */
+.methodology-steps{display:flex;flex-direction:column;gap:2px;margin-top:32px;}
+.method-step{background:var(--card-bg);border:1px solid var(--border);padding:24px 28px;display:flex;gap:24px;align-items:flex-start;transition:border-color .25s,background .25s;}
+.method-step:first-child{border-radius:10px 10px 0 0;}
+.method-step:last-child{border-radius:0 0 10px 10px;}
+.method-step:hover{border-color:var(--accent-border);background:var(--bg3);}
+.method-num{font-family:'DM Mono',monospace;font-size:22px;font-weight:700;color:var(--accent);line-height:1;flex-shrink:0;min-width:32px;}
+.method-title{font-size:14px;font-weight:700;margin-bottom:6px;}
+.method-body{font-size:13px;font-weight:300;color:var(--text-dim);line-height:1.65;}
+
+/* PILLARS / TAGS */
+.pillar-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px;}
+.pillar{background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:8px;padding:12px 16px;}
+.pillar-code{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--accent);margin-bottom:4px;}
+.pillar-label{font-size:11px;font-weight:300;color:var(--text-dim);}
+
+/* BENEFITS */
+.benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px;}
+.benefit-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:20px;transition:border-color .25s,transform .25s;}
+.benefit-card:hover{border-color:var(--accent-border);transform:translateY(-2px);}
+.benefit-title{font-size:13px;font-weight:700;margin-bottom:6px;}
+.benefit-body{font-size:12px;font-weight:300;color:var(--text-dim);line-height:1.6;}
+
+/* USE CASES */
+.usecases-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:32px;}
+.usecase{background:var(--card-bg);border:1px solid var(--border);padding:24px 28px;transition:background .2s,border-color .2s;}
+.usecase:hover{background:var(--bg3);border-color:var(--accent-border);}
+.usecase:first-child{border-radius:10px 0 0 0;}
+.usecase:nth-child(2){border-radius:0 10px 0 0;}
+.usecase:nth-child(5){border-radius:0 0 0 10px;}
+.usecase:last-child{border-radius:0 0 10px 0;}
+.usecase-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
+.usecase-title{font-size:14px;font-weight:700;margin-bottom:6px;}
+.usecase-body{font-size:12px;font-weight:300;color:var(--text-dim);line-height:1.6;}
+
+/* CAPABILITIES */
+.cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px;}
+.cap-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:22px;}
+.cap-num{font-family:'DM Mono',monospace;font-size:10px;color:var(--text-sub);letter-spacing:.08em;margin-bottom:8px;}
+.cap-title{font-size:13px;font-weight:700;margin-bottom:6px;}
+.cap-body{font-size:12px;font-weight:300;color:var(--text-dim);line-height:1.6;}
+
+/* ENTITY NOTE */
+.entity-note{background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:8px;padding:20px 24px;margin-top:32px;font-size:13px;font-weight:300;color:var(--text-dim);line-height:1.7;}
+.entity-note strong{color:var(--text);font-weight:600;}
+.entity-note a{color:var(--accent);text-decoration:none;}
+
+/* DRIVER CARDS */
+.drivers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px;}
+.driver-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:22px;position:relative;overflow:hidden;}
+.driver-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);}
+.driver-num{font-family:'DM Mono',monospace;font-size:10px;color:var(--text-sub);letter-spacing:.1em;margin-bottom:8px;}
+.driver-title{font-size:13px;font-weight:700;margin-bottom:6px;}
+.driver-body{font-size:12px;font-weight:300;color:var(--text-dim);line-height:1.6;}
+
+/* CTA */
+.service-cta{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:32px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;margin-top:48px;}
+.service-cta-text{font-size:16px;font-weight:600;color:var(--text);}
+.service-cta-sub{font-size:13px;font-weight:300;color:var(--text-dim);margin-top:4px;}
+.cta-buttons{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-primary{background:var(--accent);color:#000;padding:12px 24px;border-radius:7px;font-size:13px;font-weight:600;text-decoration:none;transition:opacity .2s,transform .2s;white-space:nowrap;}
+.btn-primary:hover{opacity:.88;transform:translateY(-1px);}
+.btn-ghost{color:var(--text);padding:11px 22px;border-radius:7px;font-size:13px;font-weight:500;text-decoration:none;border:1px solid var(--border);transition:border-color .2s,transform .2s;white-space:nowrap;}
+.btn-ghost:hover{border-color:var(--accent);transform:translateY(-1px);}
+
+/* POWERED BY */
+.powered-by{display:flex;align-items:flex-start;gap:12px;background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:8px;padding:16px 20px;margin-top:20px;}
+.powered-by-icon{font-size:18px;flex-shrink:0;margin-top:2px;}
+.powered-by-text{font-size:13px;font-weight:300;color:var(--text-dim);line-height:1.65;}
+.powered-by-text strong{color:var(--text);font-weight:600;}
+.powered-by-text a{color:var(--accent);text-decoration:none;}
+
+footer{background:var(--bg);border-top:1px solid var(--border);padding:32px 48px;}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-copy{font-family:'DM Mono',monospace;font-size:11px;color:var(--text-sub);letter-spacing:.04em;}
+.footer-hand-link{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);text-decoration:none;}
+.footer-hand-link:hover{text-decoration:underline;}
+
+@media(max-width:900px){
+  nav,.service-section{padding-left:24px;padding-right:24px;}
+  .service-nav{padding-left:24px;}
+  .service-layout{grid-template-columns:1fr;}
+  .benefits-grid,.cap-grid,.drivers-grid{grid-template-columns:1fr 1fr;}
+  .usecases-grid{grid-template-columns:1fr;}
+  footer{padding:32px 24px;}
+}
+@media(max-width:640px){
+  .benefits-grid,.cap-grid,.drivers-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="" alt="Human &amp; Digital" id="nav-logo-img">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="#" class="active">Services</a></li>
+    <li><a href="hand-standard.html">The HAND Standard</a></li>
+    <li><a href="investor-relations.html">Investors</a></li>
+    <li><a href="#" class="nav-cta">Contact Sales</a></li>
+  </ul>
+</nav>
+
+<div class="service-nav" style="margin-top:64px;">
+  <a href="#s01" class="service-nav-link">01 &mdash; Identity Intelligence</a>
+  <a href="#s02" class="service-nav-link">02 &mdash; HAND ID Registration</a>
+  <a href="#s03" class="service-nav-link">03 &mdash; Meta-Tagging &amp; Data Labeling</a>
+  <a href="#s04" class="service-nav-link">04 &mdash; Data Transformation</a>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SERVICE 01 — IDENTITY INTELLIGENCE
+═══════════════════════════════════════ -->
+<div class="service-section" id="s01">
+  <div class="reveal">
+    <div class="service-num">Service 01</div>
+    <h1 class="service-title">Identity Intelligence</h1>
+    <p class="service-tagline">Turning identity data into ethical, actionable insight &mdash; for the organizations managing human talent at scale across sports, entertainment, and the creator economy.</p>
+  </div>
+
+  <div class="service-layout reveal reveal-delay-1">
+    <div>
+      <div class="section-label">Our Approach</div>
+      <div class="content-heading">Identity Management as a Service (IDMaaS)</div>
+      <div class="content-body">
+        <p>H&amp;D's Identity Intelligence services are rooted in a heritage of Identity Management as a Service and built on our existing relationship with the HAND DOI<sup>&reg;</sup> registry. We provide clear, concise narratives from diverse identity datasets &mdash; all while adhering to privacy and legal conformance requirements.</p>
+        <p>We believe effective Identity Intelligence is a continuous journey: ethical data collection, Named Entity Resolution, analysis, visualization, and ongoing optimization. Our methodology ensures your solutions are not just tools &mdash; they become integral components of your operational framework for navigating the complex world of public figure talent identity.</p>
+        <p>Whether you&rsquo;re a studio managing cast and crew across a global catalog, a sports league tracking athlete identity across NIL deals and broadcast platforms, or a platform managing creator credentials at scale &mdash; Identity Intelligence is where the work begins.</p>
+      </div>
+      <div class="pillar-row" style="margin-top:24px;">
+        <div class="pillar">
+          <div class="pillar-code">TAM</div>
+          <div class="pillar-label">Trust &middot; Automation &middot; Measurement</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-code">NER</div>
+          <div class="pillar-label">Named Entity Resolution</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-code">IDMaaS</div>
+          <div class="pillar-label">Identity Management as a Service</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="section-label">Engagement Methodology</div>
+      <div class="methodology-steps">
+        <div class="method-step">
+          <div class="method-num">01</div>
+          <div><div class="method-title">Discovery &amp; Strategy</div><div class="method-body">We begin by understanding your unique business challenges, goals, and existing identity data infrastructure. This phase defines key indicators and identifies critical data sources related to public figures, with a strong emphasis on Trust, Automation, and Measurement.</div></div>
+        </div>
+        <div class="method-step">
+          <div class="method-num">02</div>
+          <div><div class="method-title">Data Integration &amp; Ethical Resolution</div><div class="method-body">Our experts consolidate identity data from disparate systems into a unified, clean, accessible data warehouse. Named Entity Resolution ensures data quality, consistency, and readiness for analysis &mdash; while upholding ethical principles and privacy requirements throughout.</div></div>
+        </div>
+        <div class="method-step">
+          <div class="method-num">03</div>
+          <div><div class="method-title">Identity Modeling &amp; Analysis</div><div class="method-body">We apply advanced analytical techniques to uncover trends, patterns, and anomalies within identity data. Our rigorous approach ensures insights are robust and statistically significant, with particular focus on the agency and nuances of public figures.</div></div>
+        </div>
+        <div class="method-step">
+          <div class="method-num">04</div>
+          <div><div class="method-title">Dashboard &amp; Report Development</div><div class="method-body">Intuitive, interactive dashboards and reports that present complex identity information in an easily digestible format &mdash; tailored to your specific needs and enabling quick comprehension for decision-making regarding public figure talent.</div></div>
+        </div>
+        <div class="method-step">
+          <div class="method-num">05</div>
+          <div><div class="method-title">Predictive Analytics &amp; ML Integration</div><div class="method-body">Beyond historical reporting, we leverage predictive analytics and machine learning to forecast future trends related to public figures, identify potential risks, and reveal new opportunities within the global media supply chain.</div></div>
+        </div>
+        <div class="method-step">
+          <div class="method-num">06</div>
+          <div><div class="method-title">Training &amp; Ongoing Support</div><div class="method-body">Comprehensive training ensures your team can effectively utilize the Identity Intelligence tools and interpret insights ethically. Our ongoing support ensures continued success and evolution of your initiatives.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="section-label">Key Benefits</div>
+    <div class="content-heading" style="margin-bottom:0;">What You Gain</div>
+  </div>
+  <div class="benefits-grid reveal reveal-delay-1">
+    <div class="benefit-card">
+      <div class="benefit-title">Enhanced Decision-Making</div>
+      <div class="benefit-body">Move from reactive to proactive with data-driven insights concerning public figures, grounded in Trust, Automation, and Measurement.</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-title">Improved Operational Efficiency</div>
+      <div class="benefit-body">Identify bottlenecks, optimize processes, and allocate resources more effectively in managing public figure talent across your organization.</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-title">Competitive Advantage</div>
+      <div class="benefit-body">Spot market trends, competitor movements, and emerging opportunities related to public figures faster &mdash; with ethical intelligence as your foundation.</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-title">NIL &amp; Sports Compliance</div>
+      <div class="benefit-body">For NCAA D1 programs and professional leagues: portable, verifiable athlete identity across NIL deals, transfer portal, and multi-platform broadcast rights.</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-title">Deeper Public Figure Insight</div>
+      <div class="benefit-body">Gain a comprehensive view of behavior, preferences, and segmentation for targeted, ethical strategies across talent, character, and digital replica contexts.</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-title">Increased ROI</div>
+      <div class="benefit-body">Maximize returns on your data investments by transforming identity information into strategic assets, ensuring privacy and legal conformance throughout.</div>
+    </div>
+  </div>
+
+  <div class="service-cta reveal">
+    <div>
+      <div class="service-cta-text">Ready to put Identity Intelligence to work?</div>
+      <div class="service-cta-sub">Tell us about your public figure data challenges. We&rsquo;ll design an engagement around your workflow and objectives.</div>
+    </div>
+    <div class="cta-buttons">
+      <a href="/cdn-cgi/l/email-protection#9af3f4fcf5daf2eff7fbf4fef3fdf3eefbf6b4eefff9f2" class="btn-primary">Contact Sales</a>
+      <a href="#" class="btn-ghost">View Pricing &rarr;</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SERVICE 02 — HAND ID REGISTRATION
+═══════════════════════════════════════ -->
+<div class="service-section alt" id="s02">
+  <div class="reveal">
+    <div class="service-num">Service 02</div>
+    <h2 class="service-title">HAND ID Registration</h2>
+    <p class="service-tagline">A globally unique, permanently resolvable identifier for every notable public figure &mdash; athletes, actors, creators, and the digital replicas and fictional characters they bring to life.</p>
+  </div>
+
+  <div class="service-layout reveal reveal-delay-1">
+    <div>
+      <div class="section-label">Why HAND Talent IDs</div>
+      <div class="content-heading">The proliferation problem &mdash; and its solution</div>
+      <div class="content-body">
+        <p>Digital content is exploding across every platform. Accurately identifying and attributing human talent, virtual humans, and fictional characters has become paramount for rights management, monetization, and genuine fan engagement &mdash; and the existing infrastructure was not built for this scale.</p>
+        <p>H&amp;D&rsquo;s Citation-Backed Notability&#8482; model &mdash; a candidate pool of 10M+ verifiable public figures drawn from independent, authoritative sources &mdash; ensures that every HAND ID represents a genuinely notable individual. Not a self-reported claim. Not a gamed metric. A verifiable public record of significance.</p>
+        <p>HAND IDs build on the DOI<sup>&reg;</sup> Foundation registry &mdash; the same globally trusted infrastructure behind academic publishing, EIDR, and 3 billion monthly resolutions &mdash; to deliver a specialized solution for individual and character identification across the Cultural Industries.</p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;">
+        <span style="font-family:'DM Mono',monospace;font-size:10px;background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent-border);border-radius:100px;padding:4px 12px;letter-spacing:.06em;">145K+ HAND IDs Registered</span>
+        <span style="font-family:'DM Mono',monospace;font-size:10px;background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent-border);border-radius:100px;padding:4px 12px;letter-spacing:.06em;">10M+ Citation-Backed Candidates</span>
+        <span style="font-family:'DM Mono',monospace;font-size:10px;background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent-border);border-radius:100px;padding:4px 12px;letter-spacing:.06em;">ISO 26324:2025 Aligned</span>
+        <span style="font-family:'DM Mono',monospace;font-size:10px;background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent-border);border-radius:100px;padding:4px 12px;letter-spacing:.06em;">DOI<sup>&reg;</sup> Foundation Registry</span>
+      </div>
+    </div>
+    <div>
+      <div class="section-label">What HAND ID Registration Delivers</div>
+      <div class="benefits-grid" style="grid-template-columns:1fr;gap:12px;margin-top:0;">
+        <div class="benefit-card">
+          <div class="benefit-title">Verifiable Credentials</div>
+          <div class="benefit-body">Establish attestations of authenticity for public figure talent, critical for AI provenance and the evolving synthetic media landscape.</div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-title">Streamlined IP Management</div>
+          <div class="benefit-body">Precisely identify and attribute every actor, musician, voice artist, and talent, ensuring proper royalty distribution and contractual obligations.</div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-title">Global Interoperability</div>
+          <div class="benefit-body">Freely resolvable identifiers that link talent and their contributions securely across the entire media ecosystem &mdash; any system, any partner, any jurisdiction.</div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-title">Reduced Legal Risk</div>
+          <div class="benefit-body">Minimize IP infringement and CPRA exposure by ensuring all necessary attributions are in place before content is distributed.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="section-label">Use Cases</div>
+    <div class="content-heading" style="margin-bottom:0;">Who needs HAND IDs &mdash; and why</div>
+  </div>
+  <div class="usecases-grid reveal reveal-delay-1">
+    <div class="usecase">
+      <div class="usecase-tag">Sports &mdash; College &amp; Pro</div>
+      <div class="usecase-title">Athlete Identity &amp; NIL Management</div>
+      <div class="usecase-body">500,000+ NCAA D1 athletes now have NIL rights. A portable, persistent HAND ID follows the athlete from scholarship to professional career &mdash; across transfer portal moves, school changes, endorsement deals, and broadcast platforms. For professional leagues and player associations, HAND IDs provide the neutral identifier that neither side controls but both sides can use.</div>
+    </div>
+    <div class="usecase">
+      <div class="usecase-tag">Film &amp; Television</div>
+      <div class="usecase-title">Cast &amp; Crew Attribution</div>
+      <div class="usecase-body">Accurate identification of every talent across productions for residuals, royalties, and rights clearance across global streaming and broadcast platforms. HAND IDs eliminate the name disambiguation problem that causes delays in residual processing and rights clearance across partner systems.</div>
+    </div>
+    <div class="usecase">
+      <div class="usecase-tag">Music</div>
+      <div class="usecase-title">Artist &amp; Session Musician IDs</div>
+      <div class="usecase-body">Resolve ambiguous artist names, attribute contributions across recordings, and ensure proper compensation through interoperable identifiers that work across every DSP, label system, and royalty processing platform.</div>
+    </div>
+    <div class="usecase">
+      <div class="usecase-tag">Gaming &amp; Virtual Production</div>
+      <div class="usecase-title">Digital Humans &amp; Fictional Characters</div>
+      <div class="usecase-body">Extend HAND IDs to AI-generated personas, virtual influencers, and fictional characters. Type 02 Digital Replica IDs create an auditable consent chain linking every synthetic likeness back to its Legal Person source &mdash; the infrastructure that AB 1836, the NO FAKES Act, and AI governance policies require.</div>
+    </div>
+    <div class="usecase">
+      <div class="usecase-tag">Creator Economy</div>
+      <div class="usecase-title">Independent Creator Attribution</div>
+      <div class="usecase-body">Give creators a verifiable, portable identity credential that travels with their content across every platform and distribution channel. No single platform controls it. No employer owns it. It follows the creator.</div>
+    </div>
+    <div class="usecase">
+      <div class="usecase-tag">Guilds &amp; Labor Organizations</div>
+      <div class="usecase-title">Member Identity Infrastructure</div>
+      <div class="usecase-body">Provide guild and union members with a universally resolvable identity that supports contract enforcement, benefit tracking, and AI consent verification &mdash; governed by a neutral nonprofit, not by any studio or platform with adverse interests in labor negotiations.</div>
+    </div>
+  </div>
+
+  <div class="entity-note reveal">
+    <strong>&#11041; Entity structure note:</strong> Human &amp; Digital, Inc. provides HAND ID registration as a professional service. The HAND identifier standard itself is governed by <strong>HAND &mdash; The Universal Talent Identifier</strong>, an independent Delaware nonprofit nonstock corporation, incorporated April 1, 2025, organized to qualify for 501(c)(6) trade association status. H&amp;D&rsquo;s commercial services are built on &mdash; but legally separate from &mdash; the HAND standard. <a href="https://hand-id.org">Learn more at hand-id.org &rarr;</a>
+  </div>
+
+  <div class="service-cta reveal">
+    <div>
+      <div class="service-cta-text">Ready to register HAND IDs for your talent roster?</div>
+      <div class="service-cta-sub">Whether you&rsquo;re a studio, agency, platform, league, or guild &mdash; our team will scope a registration engagement for your needs.</div>
+    </div>
+    <div class="cta-buttons">
+      <a href="/cdn-cgi/l/email-protection#84edeae2ebc4ecf1e9e5eae0ede3edf0e5e8aaf0e1e7ec" class="btn-primary">Contact Sales</a>
+      <a href="#" class="btn-ghost">View Pricing &rarr;</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SERVICE 03 — META-TAGGING
+═══════════════════════════════════════ -->
+<div class="service-section" id="s03">
+  <div class="reveal">
+    <div class="service-num">Service 03</div>
+    <h2 class="service-title">Meta-Tagging &amp;<br><em>Data Labeling</em></h2>
+    <p class="service-tagline">Making media IP rights-ready at scale. Not a niche technical process &mdash; a fundamental requirement for navigating the modern media landscape.</p>
+  </div>
+
+  <div class="service-layout reveal reveal-delay-1">
+    <div>
+      <div class="section-label">Market Context</div>
+      <div class="content-heading">The content explosion demands structured data</div>
+      <div class="content-body">
+        <p>Every minute, thousands of hours of video are uploaded and millions of images are shared. Managing this volume without robust metadata is operationally impossible at scale. The global data labeling market is projected to reach tens of billions of dollars &mdash; and media is one of its fastest-growing sectors.</p>
+        <p>Three forces are converging to make meta-tagging mission-critical across both sports and entertainment: the explosion of digital content, the rise of AI and machine learning systems that depend on accurately labeled data, and increasing legal scrutiny on IP rights across global distribution.</p>
+      </div>
+      <div class="drivers-grid" style="margin-top:24px;">
+        <div class="driver-card">
+          <div class="driver-num">DRIVER 01</div>
+          <div class="driver-title">Content Volume</div>
+          <div class="driver-body">Managing vast digital content without robust metadata is operationally impossible at scale.</div>
+        </div>
+        <div class="driver-card">
+          <div class="driver-num">DRIVER 02</div>
+          <div class="driver-title">AI &amp; ML Dependency</div>
+          <div class="driver-body">Recommendation engines, rights management systems, and content analysis tools require accurately labeled data.</div>
+        </div>
+        <div class="driver-card">
+          <div class="driver-num">DRIVER 03</div>
+          <div class="driver-title">IP Rights Scrutiny</div>
+          <div class="driver-body">Complex global licensing models demand precise identification of content elements and associated rights at every level.</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="section-label">Rights Readiness</div>
+      <div class="content-heading">IP Rights Clearance &mdash; accelerated</div>
+      <div class="content-body">
+        <p>Whether it&rsquo;s a film being licensed to a streaming service, an image in an advertisement, or a music track in a video &mdash; every element must be properly attributed and cleared. Human &amp; Digital makes that process fast, defensible, and scalable.</p>
+      </div>
+      <div class="benefits-grid" style="grid-template-columns:1fr;gap:12px;margin-top:16px;">
+        <div class="benefit-card">
+          <div class="benefit-title">Granular asset identification</div>
+          <div class="benefit-body">Precise tagging of every component within a piece of media: directors, actors, composers, locations, brands, and individual scene elements.</div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-title">Streamlined rights management</div>
+          <div class="benefit-body">Associate rich metadata with each asset to automate rights clearance: who owns which rights, what usage terms apply, when rights expire.</div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-title">Enhanced syndication &amp; monetization</div>
+          <div class="benefit-body">Well-labeled IP is rights-ready, making it easier to package, license, and distribute to partners and platforms &mdash; opening new revenue streams.</div>
+        </div>
+      </div>
+
+      <div class="section-label" style="margin-top:32px;">Talent &amp; Character Value</div>
+      <div class="content-heading">Human talent as a quantifiable asset</div>
+      <div class="content-body">
+        <p>Beyond the content itself, the human talent and characters within media are increasingly recognized as quantifiable, valuable objects in the supply chain. Their presence drives audience engagement, merchandising, and brand partnerships.</p>
+      </div>
+      <div class="benefits-grid" style="grid-template-columns:1fr;gap:12px;margin-top:16px;">
+        <div class="benefit-card">
+          <div class="benefit-title">Talent identification &amp; attribution</div>
+          <div class="benefit-body">Precise tagging of every actor, musician, voice artist, or talent featured in a piece of media, critical for royalty distribution and contractual obligations.</div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-title">Character recognition &amp; tracking</div>
+          <div class="benefit-body">For animated features, franchises, and recurring series: identify and track specific characters across assets to enable targeted merchandising and fan engagement analytics.</div>
+        </div>
+      </div>
+
+      <div class="powered-by" style="margin-top:20px;">
+        <div class="powered-by-icon">&#11041;</div>
+        <div class="powered-by-text"><strong>Powered by HAND IDs:</strong> H&amp;D&rsquo;s meta-tagging service uses HAND IDs as interoperable, freely-resolvable metadata &mdash; ensuring that talent and their contributions are accurately and securely linked across the media ecosystem. This establishes verifiable credentials and attestations of authenticity for public figure talent across all Cultural Industries. <a href="https://hand-id.org">Learn about the HAND standard &rarr;</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="service-cta reveal">
+    <div>
+      <div class="service-cta-text">Ready to make your media IP rights-ready?</div>
+      <div class="service-cta-sub">Our professional services team will assess your content library and design a meta-tagging engagement that fits your workflow.</div>
+    </div>
+    <div class="cta-buttons">
+      <a href="/cdn-cgi/l/email-protection#10797e767f5078657d717e7479777964717c3e64757378" class="btn-primary">Contact Sales</a>
+      <a href="#" class="btn-ghost">View Pricing &rarr;</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SERVICE 04 — DATA TRANSFORMATION
+═══════════════════════════════════════ -->
+<div class="service-section alt" id="s04">
+  <div class="reveal">
+    <div class="service-num">Service 04</div>
+    <h2 class="service-title">Data Transformation</h2>
+    <p class="service-tagline">From raw media data to actionable intelligence. Converting your information assets into structured, analytics-ready formats that drive strategic decisions across the media enterprise.</p>
+  </div>
+
+  <div class="service-layout reveal reveal-delay-1">
+    <div>
+      <div class="section-label">Our Approach</div>
+      <div class="content-heading">Technical depth meets media-industry expertise</div>
+      <div class="content-body">
+        <p>Most data transformation firms bring technical capability without domain fluency. Human &amp; Digital brings both. Our team understands the specific data challenges of the media supply chain &mdash; from rights metadata to talent attribution to content distribution &mdash; and builds transformation pipelines that reflect that reality.</p>
+        <p>We combine deep technical expertise with a keen understanding of business objectives, working closely with your team at every stage to ensure deliverables provide tangible, measurable value.</p>
+      </div>
+      <div class="pillar-row" style="margin-top:24px;">
+        <div class="pillar"><div class="pillar-code">ETL / ELT</div><div class="pillar-label">Automated extract, transform, load pipelines</div></div>
+        <div class="pillar"><div class="pillar-code">Cloud</div><div class="pillar-label">Secure, scalable cloud migration</div></div>
+        <div class="pillar"><div class="pillar-code">BI</div><div class="pillar-label">Media-workflow business intelligence</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="section-label">Methodology</div>
+      <div class="methodology-steps">
+        <div class="method-step">
+          <div class="method-num">01</div>
+          <div><div class="method-title">Assessment &amp; Strategy</div><div class="method-body">We map your current data landscape, identify challenges and redundancies, and collaboratively define a transformation roadmap aligned with your business goals and media-specific workflows.</div></div>
+        </div>
+        <div class="method-step">
+          <div class="method-num">02</div>
+          <div><div class="method-title">Data Integration</div><div class="method-body">Consolidate disparate data sources &mdash; rights databases, talent rosters, distribution logs, CMS platforms &mdash; into a unified, accessible, and consistent data environment.</div></div>
+        </div>
+        <div class="method-step">
+          <div class="method-num">03</div>
+          <div><div class="method-title">Data Cleansing &amp; Validation</div><div class="method-body">Eliminate errors, inconsistencies, and redundancies with robust validation processes. The result: data your teams can trust for rights decisions, talent reporting, and compliance.</div></div>
+        </div>
+        <div class="method-step">
+          <div class="method-num">04</div>
+          <div><div class="method-title">Data Modeling &amp; Architecture</div><div class="method-body">Design scalable, efficient data models and architectures that support your current analytical needs and scale with your content library, catalog, and organizational growth.</div></div>
+        </div>
+        <div class="method-step">
+          <div class="method-num">05</div>
+          <div><div class="method-title">Reporting &amp; Visualization</div><div class="method-body">Intuitive dashboards and reports that transform complex media data into digestible visual formats &mdash; empowering rights managers, producers, and executives to act on insight, not instinct.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="section-label">Key Capabilities</div>
+    <div class="content-heading" style="margin-bottom:0;">What we deliver</div>
+  </div>
+  <div class="cap-grid reveal reveal-delay-1">
+    <div class="cap-card">
+      <div class="cap-num">CAP 01</div>
+      <div class="cap-title">Cloud Data Migration</div>
+      <div class="cap-body">Seamlessly migrate your media data to secure, scalable cloud platforms with minimal disruption to production workflows.</div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-num">CAP 02</div>
+      <div class="cap-title">Data Warehousing &amp; Data Lakes</div>
+      <div class="cap-body">Build robust infrastructure for efficient storage and retrieval of media assets, rights metadata, and talent data at enterprise scale.</div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-num">CAP 03</div>
+      <div class="cap-title">ETL/ELT Development</div>
+      <div class="cap-body">Automated pipelines for extracting, transforming, and loading data &mdash; reducing manual effort and accelerating time-to-insight.</div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-num">CAP 04</div>
+      <div class="cap-title">Data Governance &amp; Security</div>
+      <div class="cap-body">Frameworks to ensure data quality, privacy, and compliance &mdash; critical for media companies navigating CPRA, GDPR, and talent contract requirements.</div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-num">CAP 05</div>
+      <div class="cap-title">Advanced Analytics &amp; BI</div>
+      <div class="cap-body">Leverage your data to uncover trends, predict content performance, optimize rights windows, and identify monetization opportunities.</div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-num">CAP 06</div>
+      <div class="cap-title">HAND ID Integration</div>
+      <div class="cap-body">Embed HAND ID resolution into your transformation pipelines &mdash; linking talent records, rights data, and content metadata through a single, globally resolvable identifier.</div>
+    </div>
+  </div>
+
+  <div class="service-cta reveal">
+    <div>
+      <div class="service-cta-text">Ready to transform your media data infrastructure?</div>
+      <div class="service-cta-sub">Every client&rsquo;s data landscape is unique. Let&rsquo;s discuss your current state and define a transformation roadmap together.</div>
+    </div>
+    <div class="cta-buttons">
+      <a href="/cdn-cgi/l/email-protection#f59c9b939ab59d8098949b919c929c819499db8190969d" class="btn-primary">Contact Sales</a>
+      <a href="#" class="btn-ghost">View Pricing &rarr;</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-bottom">
+    <div>
+      <p style="font-family:'DM Mono',monospace; font-size:10px; color:var(--text-sub); margin-bottom:6px;">DOI<sup>&reg;</sup>, DOI.ORG<sup>&reg;</sup>, and short DOI<sup>&reg;</sup> are trademarks of the International DOI Foundation.</p>
+      <span class="footer-copy">&copy; 2026 Human &amp; Digital, Inc. &middot; humandigital.tech</span>
+    </div>
+    <a href="https://hand-id.org" class="footer-hand-link">&#11041; HAND &mdash; The Universal Talent Identifier &rarr; hand-id.org</a>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const markB64 = '/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAEsKADAAQAAAABAAAEsAAAAAD/7QA4UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAAA4QklNBCUAAAAAABDUHYzZjwCyBOmACZjs+EJ+/8AAEQgEsASwAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/bAEMAAQEBAQEBAgEBAgMCAgIDBAMDAwMEBgQEBAQEBgcGBgYGBgYHBwcHBwcHBwgICAgICAkJCQkJCwsLCwsLCwsLC//bAEMBAgICAwMDBQMDBQsIBggLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLC//dAAQAS//aAAwDAQACEQMRAD8A/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP//Q/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP//R/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP//S/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP//T/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP//U/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP//V/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP//W/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP//X/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP//Q/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP//R/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP//S/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP//T/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP//U/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP//V/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP//W/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP//X/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP//Q/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP//R/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP//S/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP//T/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP//U/wA/+iiigAoo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9lA1n/0msaAP6vaKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK+cP2oP2QP2Yv20/hxL8Jf2qPBGleONBk3FINSgDyW7sMGS3mXbNby448yF0cDoa+j6KAP89//AIKUf8GZ2t6NFqXxS/4JkeKjqUCB5z4L8TShbkAc7LLUAoSQk8JHcqhAHzTsa/h/+NnwJ+M37NvxH1D4Q/H3wvqfg/xNpblLnTdVtntp05IDBXA3I2MpIuUccqSOa/3oK+Jv24P+Cdf7Hf8AwUW+G4+Gf7W3gqy8TW9ssg0+/I8nUtOeXG57S7TEsJJVSyhtj7QHVgMUAf4cFFf1S/8ABW//AINZv2r/ANhCPU/jL+yw158Xvhdbl5pDbwA69pUAyf8ASraIYuERfvXFuoHBZ4olr+VqgAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP//X/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/e4+E3/JK/DP8A2CrL/wBEpXoFef8Awm/5JX4Z/wCwVZf+iUr0CgAooooAKKKKACiiigAooooAKKKKACiiigAr+EP/AIPi/wDklf7O3/YV8R/+ibGv7vK/hD/4Pi/+SV/s7f8AYV8R/wDomxoA/wA8OiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACv8AU7/4M2/+UR+pf9lA1n/0msa/yxK/1O/+DNv/AJRH6l/2UDWf/SaxoA/q9ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACv5WP+Cyn/Br9+zf+34mr/Hf9lIWPwx+L06tPJsj8nQ9anJLE3kUSMYZnJObmFCSeZEkPI/qnooA/wi/2oP2VP2g/2MfjFqfwD/aa8L3nhLxVpJHnWd2AQ8bcpLDIhaOaJxyskbMjdjwa+e6/24/+Ck//AAS+/ZV/4Kk/A6b4PftHaOrX1qkraF4gtVVdT0a5kA/e28hHKMVXzYWzHKFG4ZCsP8mH/gql/wAEmP2m/wDgk98d5fhX8a7RtU8OagzSeHvFVpA6adq1uP7pJYRXCDia3Zi8Z5BZGR3APy6ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA/9D/AD/6KKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP97j4Tf8kr8M/wDYKsv/AESlegV5/wDCb/klfhn/ALBVl/6JSvQKACiiigAooooAKKKKACiiigAooooAKKKKACv4Q/8Ag+L/AOSV/s7f9hXxH/6Jsa/u8r+EP/g+L/5JX+zt/wBhXxH/AOibGgD/ADw6KKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK/wBTv/gzb/5RH6l/2UDWf/Saxr/LEr/U7/4M2/8AlEfqX/ZQNZ/9JrGgD+r2iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACvm79rX9kn4B/twfAfXP2b/2k9Bh8QeF9ei2yRSfLLbzKD5dxbyYLRTxE7o5F5B45BIP0jRQB/jQ/8Flf+CMHx/8A+CRXxtXQ/FPmeIvhv4hnlPhjxVFGRFcIuW+zXIAxDeRpyyfddfnjJG4J+Mtf7tn7WH7KPwL/AG2vgH4g/Zr/AGjdEj17wr4jg8q4hY7ZYpFO6OeCQcxzROA8bjkMO4yD/kD/APBY/wD4JG/GX/gkd+0w/wALfGDy634J18S3nhPxJ5eyPULRCA0cgHypdW5ZVnj91cfI60AfkXRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAH//0f8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA/3uPhN/ySvwz/ANgqy/8ARKV6BXn/AMJv+SV+Gf8AsFWX/olK9AoAKKKKACiiigAooooAKKKKACiiigAooooAK/hD/wCD4v8A5JX+zt/2FfEf/omxr+7yv4Q/+D4v/klf7O3/AGFfEf8A6JsaAP8APDooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAr/AFO/+DNv/lEfqX/ZQNZ/9JrGv8sSv9Tv/gzb/wCUR+pf9lA1n/0msaAP6vaKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACviL/AIKF/sC/An/gpN+y9r/7L/x7sw1jqaGXT9RjQNd6VqEYPkXluT0kjJ5GQJELI3ysRX27RQB/hnft7fsN/HL/AIJ1/tPeIv2Wvj/ZfZ9X0WTzLW7jB+zajYSE+ReW7H70Uygkd0YMjYdWA+OK/wBgT/g4F/4I6+Hf+CrP7KUl14Ftobb4v+AoZ77wpfHCG7BG6bTZmJA8u52jy2Y4imCtkKZA3+Qfrmiax4Z1q88OeIrWWx1DT55La6tp0McsM0TFXR1bBVlYEMCMgjBoAy6KKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD//S/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/e4+E3/JK/DP8A2CrL/wBEpXoFef8Awm/5JX4Z/wCwVZf+iUr0CgAooooAKKKKACiiigAooooAKKKKACiiigAr+EP/AIPi/wDklf7O3/YV8R/+ibGv7vK/hD/4Pi/+SV/s7f8AYV8R/wDomxoA/wA8OiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACv8AU7/4M2/+UR+pf9lA1n/0msa/yxK/1O/+DNv/AJRH6l/2UDWf/SaxoA/q9ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAC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AooooAKKKKACiiigDwD9rD/k1n4l/wDYq6z/AOkktf4Q1f7vP7WH/JrPxL/7FXWf/SSWv8IagAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD3D9nz9pb9oD9lD4j2vxd/Zt8Yar4K8SWfCX2k3L28jJkExyBTtlibHzRyBkYcMpFf2/f8ABMf/AIPKdSW+074Uf8FR9Aie2YCL/hOvDtuVdCB9++02MENk8tJabccBbc8mv4EaKAP96b4L/G74Q/tF/DXS/jH8CPEmneLfC2tRebZanpc63FvKOhG5CcOpyro2GRgVYBgQPUq/xKP+CcH/AAVZ/bI/4JbfFH/hYP7MXiEx6Zeup1jw5qAa40fVEXHE8G5dsgAAWeJo5lGQH2llP+qb/wAEk/8AgtZ+yf8A8Favht9u+Gd0PDfxB0yDzNb8HahMhv7YLtDTwEY+02hZgFmVQQSBIqMQCAfsVRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFf52X/B6t+xJD4X+Kvw0/b98I2ZSDxTbP4S8QyRphBfWIM9jK7DrJNbmaPnGEtlAz2/0Ta/HX/gvn+yMP20P+CT/xd+GGm2iXeu6NpTeJ9FBQPKL7RD9rCRekk8SS24IxxKR0JoA/xkaKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/9X/AD/6KKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP97j4Tf8kr8M/wDYKsv/AESlegV5/wDCb/klfhn/ALBVl/6JSvQKACiiigAooooAKKKKACiiigAooooAKKKKACv4Q/8Ag+L/AOSV/s7f9hXxH/6Jsa/u8r+EP/g+L/5JX+zt/wBhXxH/AOibGgD/ADw6KKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK/wBTv/gzb/5RH6l/2UDWf/Saxr/LEr/U7/4M2/8AlEfqX/ZQNZ/9JrGgD+r2iiigAooooAKKKKACiiigAooooAKKKKACiiigDwD9rD/k1n4l/wDYq6z/AOkktf4Q1f7vP7WH/JrPxL/7FXWf/SSWv8IagAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK9Y+B3x1+MH7NPxU0b43/AAF8RXvhTxZ4fn+0WGp6fIY5onwQR3DI6kq6MCjoSrAqSK8nooA/1v8A/ggj/wAF7vhz/wAFWPhyvwl+LTWnhz45eHLTzNT0yP8Ad2+sW8eAb6xBJ45HnwZLRMcjKEEf0c1/gt/A/wCNnxR/Zw+Lvh747fBXWJ9A8VeFb2LUNNv7c/PDPEeODkMrDKujAq6kqwKkiv8AYa/4In/8FaPh5/wVq/ZKtfijai30v4g+G/K0/wAZaJCSBaXxUlZ4VYlvst0FMkJJO0h4yzNGxIB+xVFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABUc0MVxE0E6h0cFWVhkEHqCO4NSUUAf4b3/BSH9mhv2Ov29fi5+zNFCbey8I+KNQs9OViSTpzSmSyY5xy1s8Tfj3r4or+sr/g8c/Z8X4W/8FTdO+Mmnw7bP4meEtPv5ZQAA19pzSWMq+5WCG2Yn/a9q/k1oAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA//1v8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA/3uPhN/ySvwz/ANgqy/8ARKV6BXn/AMJv+SV+Gf8AsFWX/olK9AoAKKKKACiiigAooooAKKKKACiiigAooooAK/hD/wCD4v8A5JX+zt/2FfEf/omxr+7yv4Q/+D4v/klf7O3/AGFfEf8A6JsaAP8APDooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAr/AFO/+DNv/lEfqX/ZQNZ/9JrGv8sSv9Tv/gzb/wCUR+pf9lA1n/0msaAP6vaKKKACiiigAooooAKKKKACiiigAooooAKKKKAPAP2sP+TWfiX/ANirrP8A6SS1/hDV/u8/tYf8ms/Ev/sVdZ/9JJa/whqACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK/Uf/AII+/wDBSzx3/wAEsf22fDv7Rmgme78NXBGl+K9KiP8Ax/6NcMvnKoJA86EhZoDkfvEAJ2MwP5cUUAf75Hw98f8Ag34r+AtE+KHw61GLV/D/AIjsLfU9NvoCTFc2l3GssMqZAO10YMMgHBrsK/jN/wCDOn/gord/HX9lbxB+wT8Q7tp9f+ErC+0N5DlptAv5DmPJyT9kuSVySAI5okUYWv7MqACiiigAooooAKKKKACiiigAooooAKKKKACiiigD+GH/AIPffg4mqfAX4E/tAwwgNoev6r4ellHUjVbeO5jU+uPsMhHpk+tf50tf6zv/AAdrfC8fEH/gi/4w8SiISv4L1/QdbT5cld90tgzDg4wt4cn0zX+TFQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB//9f/AD/6KKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP97j4Tf8kr8M/wDYKsv/AESlegV5/wDCb/klfhn/ALBVl/6JSvQKACiiigAooooAKKKKACiiigAooooAKKKKACv4Q/8Ag+L/AOSV/s7f9hXxH/6Jsa/u8r+EP/g+L/5JX+zt/wBhXxH/AOibGgD/ADw6KKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK/wBTv/gzb/5RH6l/2UDWf/Saxr/LEr/U7/4M2/8AlEfqX/ZQNZ/9JrGgD+r2iiigAooooAKKKKACiiigAooooAKKKKACiiigDwD9rD/k1n4l/wDYq6z/AOkktf4Q1f7vP7WH/JrPxL/7FXWf/SSWv8IagAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD9f/wDgg9+2Xe/sN/8ABU34U/Fee48jQtZ1SPwxr2ThDpmtMttI799sDtHccckxD6V/s81/gEo7xuJIyVZTkEcEEV/uO/8ABNv9omb9rT9gX4P/ALRt9KZ77xZ4U0y8v3JyTfiFUuue+J1kFAH2zRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB+Rv/BerwKvxE/4I6ftDaAy7/s/hG61PGAf+QWyXuefTyc1/i81/uR/8FJ/Dg8Yf8E6vj54UKCT+0vhz4ptQp7mXTLhR056ntzX+G5QAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB//Q/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/e4+E3/JK/DP8A2CrL/wBEpXoFef8Awm/5JX4Z/wCwVZf+iUr0CgAooooAKKKKACiiigAooooAKKKKACiiigAr+EP/AIPi/wDklf7O3/YV8R/+ibGv7vK/hD/4Pi/+SV/s7f8AYV8R/wDomxoA/wA8OiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACv8AU7/4M2/+UR+pf9lA1n/0msa/yxK/1O/+DNv/AJRH6l/2UDWf/SaxoA/q9ooooAKKKKACiiigAooooAKKKKACiiigAooooA8A/aw/5NZ+Jf8A2Kus/wDpJLX+ENX+7z+1h/yaz8S/+xV1n/0klr/CGoAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK/wBZH/g0g+KknxF/4Iy+GPC8shkbwR4j13Q+c5UPcf2gBk+gvRjHAHHav8m6v9Lb/gyW8UyXf7BvxZ8FEjZp/j77cBk5zeadaxnjoP8Aj3HPU9+goA/tCooooAKKKKACiiigAooooAKKKKACiiigAooooA+fP2trSO//AGVPibYyp5qzeE9ajKYzuDWcox+Nf4RVf7zH7Qv/ACQLxx/2L+p/+k0lf4M9ABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAH//0f8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA/3uPhN/ySvwz/ANgqy/8ARKV6BXn/AMJv+SV+Gf8AsFWX/olK9AoAKKKKACiiigAooooAKKKKACiiigAooooAK/hD/wCD4v8A5JX+zt/2FfEf/omxr+7yv4Q/+D4v/klf7O3/AGFfEf8A6JsaAP8APDooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAr/AFO/+DNv/lEfqX/ZQNZ/9JrGv8sSv9Tv/gzb/wCUR+pf9lA1n/0msaAP6vaKKKACiiigAooooAKKKKACiiigAooooAKKKKAPAP2sP+TWfiX/ANirrP8A6SS1/hDV/u8/tYf8ms/Ev/sVdZ/9JJa/whqACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACv8ARm/4MgLyZ/2dfjzp7Y8uLxHpEi+u57WUH/0EV/nM1/ouf8GPv/JAvj7/ANjBov8A6TT0Af3OUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAeP/ALQv/JAvHH/Yv6n/AOk0lf4M9f7zH7Qv/JAvHH/Yv6n/AOk0lf4M9ABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAH/0v8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA/3uPhN/ySvwz/ANgqy/8ARKV6BXn/AMJv+SV+Gf8AsFWX/olK9AoAKKKKACiiigAooooAKKKKACiiigAooooAK/hD/wCD4v8A5JX+zt/2FfEf/omxr+7yv4Q/+D4v/klf7O3/AGFfEf8A6JsaAP8APDooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAr/AFO/+DNv/lEfqX/ZQNZ/9JrGv8sSv9Tv/gzb/wCUR+pf9lA1n/0msaAP6vaKKKACiiigAooooAKKKKACiiigAooooAKKKKAPAP2sP+TWfiX/ANirrP8A6SS1/hDV/u8/tYf8ms/Ev/sVdZ/9JJa/whqACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACv8ARc/4Mff+SBfH3/sYNF/9Jp6/zo6/0XP+DH3/AJIF8ff+xg0X/wBJp6AP7nKKKKACiiigAooooAKKKKACiiigAooooAKKKKAPH/2hf+SBeOP+xf1P/wBJpK/wZ6/3mP2hf+SBeOP+xf1P/wBJpK/wZ6ACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/9P/AD/6KKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP97j4Tf8kr8M/wDYKsv/AESlegV5/wDCb/klfhn/ALBVl/6JSvQKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAPAP2sP+TWfiX/2Kus/+kktf4Q1f7vP7WH/JrPxL/wCxV1n/ANJJa/whqACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACv9Fz/AIMff+SBfH3/ALGDRf8A0mnr/Ojr/Rc/4Mff+SBfH3/sYNF/9Jp6AP7nKKKKACiiigAooooAKKKKACiiigAooooAKKKKAPH/ANoX/kgXjj/sX9T/APSaSv8ABnr/AHmP2hf+SBeOP+xf1P8A9JpK/wAGegAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/1P8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA/3uPhN/ySvwz/ANgqy/8ARKV6BXn/AMJv+SV+Gf8AsFWX/olK9AoAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA8A/aw/5NZ+Jf/Yq6z/6SS1/hDV/u8/tYf8ms/Ev/ALFXWf8A0klr/CGoAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK/0XP8Agx9/5IF8ff8AsYNF/wDSaev86Ov9Fz/gx9/5IF8ff+xg0X/0mnoA/ucooooAKKKKACiiigAooooAKKKKACiiigAooooA8f8A2hf+SBeOP+xf1P8A9JpK/wAGev8AeY/aF/5IF44/7F/U/wD0mkr/AAZ6ACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/V/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/e4+E3/JK/DP8A2CrL/wBEpXoFef8Awm/5JX4Z/wCwVZf+iUr0CgAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigDwD9rD/k1n4l/9irrP/pJLX+ENX+7z+1h/yaz8S/8AsVdZ/wDSSWv8IagAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAr/Rc/wCDH3/kgXx9/wCxg0X/ANJp6/zo6/0XP+DH3/kgXx9/7GDRf/SaegD+5yiiigAooooAKKKKACiiigAooooAKKKKACiiigDx/wDaF/5IF44/7F/U/wD0mkr/AAZ6/wB5j9oX/kgXjj/sX9T/APSaSv8ABnoAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA/9b/AD/6KKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP97j4Tf8kr8M/wDYKsv/AESlegV5/wDCb/klfhn/ALBVl/6JSvQKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAPAP2sP+TWfiX/2Kus/+kktf4Q1f7vP7WH/JrPxL/wCxV1n/ANJJa/whqACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACv9Fz/AIMff+SBfH3/ALGDRf8A0mnr/Ojr/Rc/4Mff+SBfH3/sYNF/9Jp6AP7nKKKKACiiigAooooAKKKKACiiigAooooAKKKKAPH/ANoX/kgXjj/sX9T/APSaSv8ABnr/AHmP2hf+SBeOP+xf1P8A9JpK/wAGegAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/1/8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA/3uPhN/ySvwz/ANgqy/8ARKV6BXn/AMJv+SV+Gf8AsFWX/olK9AoAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA8A/aw/5NZ+Jf/Yq6z/6SS1/hDV/u8/tYf8ms/Ev/ALFXWf8A0klr/CGoAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK/0XP8Agx9/5IF8ff8AsYNF/wDSaev86Ov9Fz/gx9/5IF8ff+xg0X/0mnoA/ucooooAKKKKACiiigAooooAKKKKACiiigAooooA8f8A2hf+SBeOP+xf1P8A9JpK/wAGev8AeY/aF/5IF44/7F/U/wD0mkr/AAZ6ACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/Q/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/e4+E3/JK/DP8A2CrL/wBEpXoFef8Awm/5JX4Z/wCwVZf+iUr0CgAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigDwD9rD/k1n4l/9irrP/pJLX+ENX+7z+1h/yaz8S/8AsVdZ/wDSSWv8IagAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAr/Rc/wCDH3/kgXx9/wCxg0X/ANJp6/zo6/0XP+DH3/kgXx9/7GDRf/SaegD+5yiiigAooooAKKKKACiiigAooooAKKKKACiiigDx/wDaF/5IF44/7F/U/wD0mkr/AAZ6/wB5j9oX/kgXjj/sX9T/APSaSv8ABnoAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA/9H/AD/6KKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP97j4Tf8kr8M/wDYKsv/AESlegV5/wDCb/klfhn/ALBVl/6JSvQKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAPAP2sP+TWfiX/2Kus/+kktf4Q1f7vP7WH/JrPxL/wCxV1n/ANJJa/whqACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACv9Fz/AIMff+SBfH3/ALGDRf8A0mnr/Ojr/Rc/4Mff+SBfH3/sYNF/9Jp6AP7nKKKKACiiigAooooAKKKKACiiigAooooAKKKKAPH/ANoX/kgXjj/sX9T/APSaSv8ABnr/AHmP2hf+SBeOP+xf1P8A9JpK/wAGegAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/0v8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA/3uPhN/ySvwz/ANgqy/8ARKV6BXn/AMJv+SV+Gf8AsFWX/olK9AoAKKKKACiiigAooooAKKKKACiiigAooooAK/hD/wCD4v8A5JX+zt/2FfEf/omxr+7yv4Q/+D4v/klf7O3/AGFfEf8A6JsaAP8APDooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAr/AFO/+DNv/lEfqX/ZQNZ/9JrGv8sSv9Tv/gzb/wCUR+pf9lA1n/0msaAP6vaKKKACiiigAooooAKKKKACiiigAooooAKKKKAPAP2sP+TWfiX/ANirrP8A6SS1/hDV/u8/tYf8ms/Ev/sVdZ/9JJa/whqACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACv8ARc/4Mff+SBfH3/sYNF/9Jp6/zo6/0Zv+DICzmT9nX486g2PLl8R6RGvruS1lJ/8AQhQB/clRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB4/8AtC/8kC8cf9i/qf8A6TSV/gz1/vMftC/8kC8cf9i/qf8A6TSV/gz0AFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAf/T/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/e4+E3/JK/DP8A2CrL/wBEpXoFef8Awm/5JX4Z/wCwVZf+iUr0CgAooooAKKKKACiiigAooooAKKKKACiiigAr+EP/AIPi/wDklf7O3/YV8R/+ibGv7vK/hD/4Pi/+SV/s7f8AYV8R/wDomxoA/wA8OiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACv8AU7/4M2/+UR+pf9lA1n/0msa/yxK/1O/+DNv/AJRH6l/2UDWf/SaxoA/q9ooooAKKKKACiiigAooooAKKKKACiiigAooooA8A/aw/5NZ+Jf8A2Kus/wDpJLX+ENX+7z+1h/yaz8S/+xV1n/0klr/CGoAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK/wBLf/gyW8LSWn7BXxZ8bFMLqHj42Ib1Nnp1pIR+H2gfnX+aRX+sz/waT/Ceb4b/APBGPwn4muIjE/jjxBruu4IwSqXJsFY9+VswQT1GCOMUAf0v0UUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAeP/ALQv/JAvHH/Yv6n/AOk0lf4M9f7uv7W13HYfsqfE2+lfylh8J61IXzjaFs5Tn8K/wiqACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP//U/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/e4+E3/JK/DP8A2CrL/wBEpXoFef8Awm/5JX4Z/wCwVZf+iUr0CgAooooAKKKKACiiigAooooAKKKKACiiigAr+EP/AIPi/wDklf7O3/YV8R/+ibGv7vK/hD/4Pi/+SV/s7f8AYV8R/wDomxoA/wA8OiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACv8AU7/4M2/+UR+pf9lA1n/0msa/yxK/1O/+DNv/AJRH6l/2UDWf/SaxoA/q9ooooAKKKKACiiigAooooAKKKKACiiigAooooA8A/aw/5NZ+Jf8A2Kus/wDpJLX+ENX+7z+1h/yaz8S/+xV1n/0klr/CGoAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAkhhluJVggUu7kKqqMkk9AB3Jr/cn/AOCdX7Ox/ZK/YQ+EX7N9xEIbzwh4U0uwv1Axm/WBWu2x23XDSN+Pev8AJp/4ICfsbSftv/8ABVn4VfDLUbQ3fh7w/qI8Va8GQyRDT9FIuCkoAOI7iYQ2xJwMzAZ5Ff7MdABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB8Xf8FIvEI8Jf8E7vj34rJKjTPhz4pu8jgjydMuH7A+noa/w2K/2iv+C8vjVfAP8AwR2/aH11ztE/g+703qRzqRW0HT1876HvxX+LrQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB//9X/AD/6KKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP97j4Tf8kr8M/wDYKsv/AESlegV5/wDCb/klfhn/ALBVl/6JSvQKACiiigAooooAKKKKACiiigAooooAKKKKACv4Q/8Ag+L/AOSV/s7f9hXxH/6Jsa/u8r+EP/g+L/5JX+zt/wBhXxH/AOibGgD/ADw6KKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK/wBTv/gzb/5RH6l/2UDWf/Saxr/LEr/U7/4M2/8AlEfqX/ZQNZ/9JrGgD+r2iiigAooooAKKKKACiiigAooooAKKKKACiiigDwD9rD/k1n4l/wDYq6z/AOkktf4Q1f7vP7WH/JrPxL/7FXWf/SSWv8IagAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiv1l/4Iwf8ExvG3/BVL9t3QPgRYRTW/g3SmTV/GOqJ8q2ejwOvmIr9p7kkQQAZ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+CSfwJniu/h5+z94N+0QAeVPqmnrrEyFejLJfm4cN/tA7vev0t8L+E/CvgjRIfDXgvTLTSNOththtbKFLeCMeipGFUD6CgD/ACZf2WP+DVX/AIK+/tJSW+o+KvB1h8LdGnAYXvi+9S3l2nqPsdsLi7Vh6SwxjPfrX9RP7GH/AAZj/sWfCea08T/tm+M9X+LGox7Xk0qwDaHo5JB3I5ike8lAJGHW4gzjlcHA/sxooA8N+AH7Mv7PH7KngaP4afs2eCdF8DaEhVjZ6LZRWaSOoC+ZL5agyyED5pJCzt1JJr3KiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigDh/ib8R/Bvwe+HOvfFj4i3qaboHhnT7nVNRunyVhtbSNpZXIGSdqqTgcnoOa/xBP+Cgf7X3i39vX9s34h/ta+MvNjm8Z6vNdWttK29rSwjxFZ22ckfuLZI4+ODtz3r/QS/wCDwT/gpRF8Af2TdL/YI+GmoiPxZ8Wj9o10Qv8AvbXw7aOCVbGGU3s4WMdmiimUjDCv8yigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA//0f8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA/3uPhN/ySvwz/ANgqy/8ARKV6BXn/AMJv+SV+Gf8AsFWX/olK9AoAKKKKACiiigAooooAKKKKACiiigAooooAK/hD/wCD4v8A5JX+zt/2FfEf/omxr+7yv4Q/+D4v/klf7O3/AGFfEf8A6JsaAP8APDooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAr/AFO/+DNv/lEfqX/ZQNZ/9JrGv8sSv9Tv/gzb/wCUR+pf9lA1n/0msaAP6vaKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAryf47fG34cfs2/BnxR8ffi9qCaX4Z8H6Zc6tqVy5HyQWyF2CgkbnbG2NBy7kKMkivWK/wA6n/g7x/4K9x/Ebxev/BLX4D6kX0Tw7cw3vju5gYFLnUYiJLfT8g8pbHbLMOnn7Bw0RoA/k8/4KOftv/ED/gop+2X44/az+IJkhfxLfv8A2bYu+8afpcPyWdquOP3UIUMQAHk3PjLGviCiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA/9L/AD/6KKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP97j4Tf8kr8M/wDYKsv/AESlegV5/wDCb/klfhn/ALBVl/6JSvQKACiiigAooooAKKKKACiiigAooooAKKKKACv4Q/8Ag+L/AOSV/s7f9hXxH/6Jsa/u8r+EP/g+L/5JX+zt/wBhXxH/AOibGgD/ADw6KKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK/wBTv/gzb/5RH6l/2UDWf/Saxr/LEr/U7/4M2/8AlEfqX/ZQNZ/9JrGgD+r2iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoor4K/4KQ/8FE/gD/wTD/Zg1b9pn4+3LNBA32PSdKgYC71bUpFZorWAHgFgrM7n5Y41ZzwMEA/PL/g4P/4LG6D/AMEqv2VJNI+Hl3FN8YviBb3Fl4Vtflc2KgBJdTlQhl2W24eUrgiWbC4ZFk2/5D+va9rfirXb3xP4mu5tQ1LUp5Lq7urhzJNPPMxeSSR2JZndiWZicknJr6f/AG4v21fjn/wUG/aX8R/tTftC363niDxBKoWGEbLaytIhtgtbdOdsUKfKuSWY5dyzszH5KoAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD//0/8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA/3uPhN/ySvwz/ANgqy/8ARKV6BXn/AMJv+SV+Gf8AsFWX/olK9AoAKKKKACiiigAooooAKKKKACiiigAooooAK/hD/wCD4v8A5JX+zt/2FfEf/omxr+7yv4Q/+D4v/klf7O3/AGFfEf8A6JsaAP8APDooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAr/AFO/+DNv/lEfqX/ZQNZ/9JrGv8sSv9Tv/gzb/wCUR+pf9lA1n/0msaAP6vaKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK+LP28/2/wD9mT/gnB8A9Q/aE/ae16PStNtw0dhYxlXv9VvMZS1s4SQZZW79EjXLyMqKzAA3v23P23P2ef8Agnx+zzrX7S/7S+srpOgaSuyKJMPd3924JitLSIkGWeUg7VyAAC7lUVmH+QD/AMFYf+CrH7QP/BWP9pG4+MvxblbTfDmmNNb+F/DUUhe10ixdgdo4AkuJQqm4nIBkYAAKioiWv+CsP/BWn9o7/grP+0A/xW+ME39leGtJMsHhnwxayM1lpVq5GeuPNuZQFM85ALkAALGqIv5YUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAf/1P8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA/3uPhN/ySvwz/ANgqy/8ARKV6BXn/AMJv+SV+Gf8AsFWX/olK9AoAKKKKACiiigAooooAKKKKACiiigAooooAK/hD/wCD4v8A5JX+zt/2FfEf/omxr+7yv4Q/+D4v/klf7O3/AGFfEf8A6JsaAP8APDooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAr/AFO/+DNv/lEfqX/ZQNZ/9JrGv8sSv9Tv/gzb/wCUR+pf9lA1n/0msaAP6vaKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoqvd3drp9rLf30qQwQI0kkkjBURFGSzE8AAcknpX8WP/BZ7/g7G+FnwDttV/Z1/4JoXVl418blZLW98ZEC40bSnIK/6GD8l9cKeQ/NspA/13zIAD9wv+CuH/BbX9lD/AIJK/Dg3HxEuV8T/ABF1OAyaJ4NsJlW9uc5CzXLYYWtruBBldSWwRGjsCB/lBf8ABQT/AIKK/tRf8FMfjzc/H39qHW/t95hoNM022Bi07SrQtuFvaQ5OxB/EzFpJCN0jM3NfLXxW+LPxL+OnxF1f4t/GLXb3xL4m165e71DUtQlaa4uJnOSzM35ADAUAAAAAV57QAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAf/1f8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA/3uPhN/ySvwz/ANgqy/8ARKV6BXn/AMJv+SV+Gf8AsFWX/olK9AoAKKKKACiiigAooooAKKKKACiiigAooooAK/hD/wCD4v8A5JX+zt/2FfEf/omxr+7yv4Q/+D4v/klf7O3/AGFfEf8A6JsaAP8APDooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAr/AFO/+DNv/lEfqX/ZQNZ/9JrGv8sSv9Tv/gzb/wCUR+pf9lA1n/0msaAP6vaKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK+OP2yf+CgX7HX7AHgI/EP8Aa28e6Z4QtJEZrW2ncy396V6ra2kQaec54PloQvViBzQB9j1+ZX/BRX/grt+w3/wTA8GHXf2mfFkS69PF5mn+GNMK3Wt3uc7SlsGUxxkgjzpmjiB437sA/wAUP/BTv/g8R+OXxjgvvhR/wTd0SX4c6BLvik8Vaskc+u3CZxm2gBkt7MEZBYmeXBBVomFfxkePfH/jr4p+MdR+InxN1q+8Ra/q8xuL7UtSuJLq7uZW6vLLKzO7H1Yk0AfvJ/wVs/4OMv20P+CoEl98MdJlPw0+E0jlV8MaTOzS30fb+0roBGue58pVjgHGUZlD1/PbRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAH/1v8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA/3uPhN/ySvwz/ANgqy/8ARKV6BXn/AMJv+SV+Gf8AsFWX/olK9AoAKKKKACiiigAooooAKKKKACiiigAooooAK/hD/wCD4v8A5JX+zt/2FfEf/omxr+7yv4Q/+D4v/klf7O3/AGFfEf8A6JsaAP8APDooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAr/AFO/+DNv/lEfqX/ZQNZ/9JrGv8sSv9Tv/gzb/wCUR+pf9lA1n/0msaAP6vaKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKjmmit4mnnYIiAszMcAAdST2AoAkor8k/wBqX/gut/wSg/Y/W4tPi38adButVtyyNpWgSNrl8JF/5ZvFYibym7fvjGoPUiv5kf2uf+D2rwvZm60D9hj4Qz3zAFYda8aXAgj3DIyLCzd2Zc4IJu0JHBUHoAf3tV+NP7cv/BfT/gl5+wIt7ovxV+I1t4g8U2YOfDfhfGral5mCdknlMILduOlxNF1HqK/zBv2y/wDguT/wVF/brS70f43/ABX1W28PXYKPoGgt/Y+ltGSSI5IbXYZ1B6faGlbgckgV+S1AH9iv7f3/AAeLftofHiLUPAf7E/h+z+EPhy5Tyhq0+NS8QupyGKSMBa24YHokMkiHlZga/ko+JvxV+J/xq8Z3nxG+MXiPU/FfiDUG33Wp6xdy313M3XLzTM7t17k1wNFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB//1/8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA/3uPhN/ySvwz/ANgqy/8ARKV6BX+fH4T/AOD4D/hF/CumeGf+GYvP/s60htfM/wCE027/ACUCbsf2McZxnGTiug/4jnf+rXf/AC9v/vLQB/f5RX8Af/Ec7/1a7/5e3/3lo/4jnf8Aq13/AMvb/wC8tAH9/lFfwB/8Rzv/AFa7/wCXt/8AeWj/AIjnf+rXf/L2/wDvLQB/f5RX8Af/ABHO/wDVrv8A5e3/AN5aP+I53/q13/y9v/vLQB/f5RX8Af8AxHO/9Wu/+Xt/95aP+I53/q13/wAvb/7y0Af3+UV/AH/xHO/9Wu/+Xt/95aP+I53/AKtd/wDL2/8AvLQB/f5RX8Af/Ec7/wBWu/8Al7f/AHlo/wCI53/q13/y9v8A7y0Af3+V/CH/AMHxf/JK/wBnb/sK+I//AETY15//AMRzv/Vrv/l7f/eWvwh/4Li/8F6/+HzfhX4deGf+FU/8K3/4QG71K68z+3f7Y+1/2gkCbcfYbPy9nk5zl927tjkA/nhooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAr/U7/AODNv/lEfqX/AGUDWf8A0msa/wAsSv6nv+CNv/By/wD8Ok/2R7n9lj/hSn/CwPtHiC913+1P+Ej/ALKx9rigj8ryf7Ous7fJzv8AM53Y2jHIB/qtUV/AH/xHO/8AVrv/AJe3/wB5aP8AiOd/6td/8vb/AO8tAH9/lFfwB/8AEc7/ANWu/wDl7f8A3lo/4jnf+rXf/L2/+8tAH9/lFfwB/wDEc7/1a7/5e3/3lo/4jnf+rXf/AC9v/vLQB/f5RX8Af/Ec7/1a7/5e3/3lo/4jnf8Aq13/AMvb/wC8tAH9/lFfwB/8Rzv/AFa7/wCXt/8AeWj/AIjnf+rXf/L2/wDvLQB/f5RX8Af/ABHO/wDVrv8A5e3/AN5aP+I53/q13/y9v/vLQB/f5RX8Af8AxHO/9Wu/+Xt/95aP+I53/q13/wAvb/7y0Af3+UV/AH/xHO/9Wu/+Xt/95aP+I53/AKtd/wDL2/8AvLQB/f5RX8Af/Ec7/wBWu/8Al7f/AHlo/wCI53/q13/y9v8A7y0Af3+UV/AH/wARzv8A1a7/AOXt/wDeWj/iOd/6td/8vb/7y0Af3+UV/AH/AMRzv/Vrv/l7f/eWj/iOd/6td/8AL2/+8tAH9/lFfwB/8Rzv/Vrv/l7f/eWj/iOd/wCrXf8Ay9v/ALy0Af3+UV/AH/xHO/8AVrv/AJe3/wB5aP8AiOd/6td/8vb/AO8tAH9/lFfwB/8AEc7/ANWu/wDl7f8A3lo/4jnf+rXf/L2/+8tAH9/lFfwB/wDEc7/1a7/5e3/3lo/4jnf+rXf/AC9v/vLQB/f5RX8Af/Ec7/1a7/5e3/3lo/4jnf8Aq13/AMvb/wC8tAH9/lFf59t5/wAHy+uvNu0/9mWCKPH3ZPGDO2fqNJX+VcPqf/B8P8ZpVI0b9nvRbdsnmbX55hjt920j/H19qAP9Eqiv817X/wDg9v8A217iNh4X+DvgizfHym6mv7kA4PUJPDnnHccce48B8V/8HnH/AAVd19Wj0Tw38OdDBPyta6TfSOACeCbjUZVJI4J2jpwBQB/qP0V/kd+NP+Drf/gtr4rDppPxL03w8jqVI07w9phxnuDc287A44yD+vNfGnxC/wCC73/BYb4mpIniT9ofxlbCUkt/ZN7/AGQRn0NisBX8MUAf7RrukaGSQhVUZJPAAFfKHxc/b0/Yf+ATSQ/G74w+C/Cc0QYmHVtdsrSYleoWOSVXY9sBSc9q/wASr4l/tPftKfGgyH4xfEPxN4sMow/9s6tdX+4dOfPkfPFeG0Af6+nxl/4Ogv8Agiz8HTJar8WG8V3sYJ+z+HdKvb3OPScwx2xz0/1314r8efjp/wAHu37N2iJLb/s2fBLxH4kkyVSbxHqFtoyD/a2Ww1BmH+zuUkdxX+cjRQB/Vz+0R/weI/8ABVn4s+fYfBuDwr8LrNifJl0vTf7RvlU9nl1F7iFj7rbp9K/A39o//gob+3P+15JIP2lvi14p8ZWsh3fYdQ1OZrBDxnZaKy26ZwM7IxmvjiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA//0P8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD//0f8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD//0v8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD//0/8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD//1P8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD//1f8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD//1v8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD//1/8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD//0P8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD//0f8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD//0v8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD//0/8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD//1P8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD//1f8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD//1v8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD//1/8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD//0P8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD//0f8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD//2Q==';
+  document.getElementById('nav-logo-img').src = 'data:image/jpeg;base64,' + markB64;
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold:.07, rootMargin:'0px 0px -32px 0px' });
+  revealEls.forEach(el => observer.observe(el));
+
+  // Sticky service nav highlight
+  const sections = document.querySelectorAll('.service-section');
+  const navLinks = document.querySelectorAll('.service-nav-link');
+  const sectionObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting) {
+        navLinks.forEach(l =

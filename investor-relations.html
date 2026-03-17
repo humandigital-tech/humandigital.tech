@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investor Relations &mdash; Human &amp; Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0f0f0f; --bg2:#161616; --bg3:#1e1e1e;
+  --border:rgba(255,255,255,0.08); --text:#f0f0f0;
+  --text-dim:#888; --text-sub:#555; --nav-bg:rgba(15,15,15,0.92);
+  --card-bg:#161616; --accent:#0066FF;
+  --accent-dim:rgba(0,102,255,0.12); --accent-border:rgba(0,102,255,0.3);
+  --green:#059669; --green-dim:rgba(5,150,105,0.1); --green-border:rgba(5,150,105,0.3);
+  --amber:#D97706; --amber-dim:rgba(217,119,6,0.1); --amber-border:rgba(217,119,6,0.3);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes glowPulse{0%,100%{opacity:.07;}50%{opacity:.12;}}
+@keyframes navSlide{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
+@keyframes dotPulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+@keyframes drawLine{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-delay-1{transition-delay:.08s;} .reveal-delay-2{transition-delay:.16s;}
+.reveal-delay-3{transition-delay:.24s;} .reveal-delay-4{transition-delay:.32s;}
+.reveal-delay-5{transition-delay:.40s;} .reveal-delay-6{transition-delay:.48s;}
+@media(prefers-reduced-motion:reduce){.reveal,.reveal.visible{opacity:1;transform:none;transition:none;}}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(16px);background:var(--nav-bg);border-bottom:1px solid var(--border);padding:0 48px;height:64px;display:flex;align-items:center;justify-content:space-between;animation:navSlide .5s ease both;}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-logo img{height:32px;width:auto;}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none;}
+.nav-links a{font-size:13px;font-weight:500;letter-spacing:.04em;color:var(--text-dim);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--text);}
+.nav-cta{background:var(--accent);color:#000!important;padding:8px 20px;border-radius:6px;font-weight:600!important;transition:opacity .2s!important;}
+.nav-cta:hover{opacity:.85;}
+
+.hero{min-height:76vh;display:flex;flex-direction:column;justify-content:center;padding:120px 48px 80px;position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
+.hero-glow{position:absolute;top:-200px;right:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(0,102,255,.07) 0%,transparent 70%);pointer-events:none;animation:glowPulse 8s ease-in-out infinite;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:.5;pointer-events:none;}
+.eyebrow{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:24px;display:flex;align-items:center;gap:12px;animation:fadeIn .8s ease .3s both;}
+.eyebrow::before{content:'';width:32px;height:1px;background:var(--accent);animation:drawLine .6s ease .5s both;transform-origin:left;}
+.hero h1{font-size:clamp(36px,5vw,68px);font-weight:700;line-height:1.06;letter-spacing:-.025em;max-width:860px;margin-bottom:24px;animation:fadeUp .8s cubic-bezier(.22,1,.36,1) .4s both;}
+.hero h1 em{font-style:normal;color:var(--accent);}
+.hero-sub{font-size:clamp(15px,1.8vw,19px);font-weight:300;color:var(--text-dim);max-width:680px;line-height:1.7;margin-bottom:16px;animation:fadeUp .8s cubic-bezier(.22,1,.36,1) .55s both;}
+.disclaimer{font-family:'DM Mono',monospace;font-size:11px;color:var(--text-sub);background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 16px;max-width:680px;line-height:1.6;margin-bottom:40px;animation:fadeIn .8s ease .7s both;}
+.hero-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;animation:fadeUp .8s cubic-bezier(.22,1,.36,1) .8s both;}
+.btn-primary{background:var(--accent);color:#000;padding:12px 28px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;transition:opacity .2s,transform .2s;display:inline-block;}
+.btn-primary:hover{opacity:.88;transform:translateY(-1px);}
+.btn-ghost{color:var(--text);padding:12px 24px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;border:1px solid var(--border);transition:border-color .2s,transform .2s;display:inline-block;}
+.btn-ghost:hover{border-color:var(--accent);transform:translateY(-1px);}
+
+section{padding:80px 48px;border-bottom:1px solid var(--border);}
+.section-label{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;}
+.section-title{font-size:clamp(26px,3.5vw,44px);font-weight:700;letter-spacing:-.022em;line-height:1.1;margin-bottom:18px;}
+.section-title em{font-style:normal;color:var(--accent);}
+.section-sub{font-size:16px;font-weight:300;color:var(--text-dim);line-height:1.7;max-width:680px;}
+
+.metrics-bar{display:grid;grid-template-columns:repeat(5,1fr);border-bottom:1px solid var(--border);background:var(--bg2);}
+.metric{padding:28px 24px;border-right:1px solid var(--border);transition:background .2s;}
+.metric:last-child{border-right:none;}
+.metric:hover{background:var(--bg3);}
+.metric-num{font-size:clamp(22px,2.5vw,36px);font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--text);margin-bottom:6px;}
+.metric-num em{font-style:normal;color:var(--accent);}
+.metric-label{font-size:12px;font-weight:400;color:var(--text-dim);line-height:1.4;}
+.metric-sub{font-family:'DM Mono',monospace;font-size:10px;color:var(--text-sub);margin-top:4px;letter-spacing:.04em;}
+
+.forces-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:48px;}
+.force-card{background:var(--card-bg);padding:32px 28px;border:1px solid var(--border);position:relative;overflow:hidden;transition:border-color .25s,transform .25s;}
+.force-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.22,1,.36,1);}
+.force-card:hover::before{transform:scaleX(1);}
+.force-card:hover{transform:translateY(-2px);border-color:var(--accent-border);}
+.force-card.sports::before{background:var(--green);}
+.force-card.sports:hover{border-color:var(--green-border);}
+.force-num{font-family:'DM Mono',monospace;font-size:10px;color:var(--text-sub);letter-spacing:.1em;margin-bottom:14px;}
+.force-title{font-size:18px;font-weight:700;margin-bottom:12px;letter-spacing:-.01em;}
+.force-body{font-size:13px;font-weight:300;color:var(--text-dim);line-height:1.7;}
+.force-pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;}
+.force-pill{font-family:'DM Mono',monospace;font-size:10px;background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent-border);border-radius:100px;padding:3px 10px;letter-spacing:.04em;}
+.force-pill.green{background:var(--green-dim);color:var(--green);border-color:var(--green-border);}
+
+.timeline{position:relative;margin-top:56px;}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--border);}
+.timeline-entry{padding:0 0 48px 40px;position:relative;}
+.timeline-entry::before{content:'';position:absolute;left:-5px;top:4px;width:10px;height:10px;background:var(--bg3);border:2px solid var(--border);border-radius:50%;transition:background .3s,border-color .3s;}
+.timeline-entry.active::before{background:var(--accent);border-color:var(--accent);}
+.timeline-entry:hover::before{background:var(--accent);border-color:var(--accent);}
+.timeline-year{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--accent);margin-bottom:8px;}
+.timeline-heading{font-size:17px;font-weight:700;margin-bottom:8px;}
+.timeline-body{font-size:13px;font-weight:300;color:var(--text-dim);line-height:1.7;}
+.timeline-pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.timeline-pill{font-family:'DM Mono',monospace;font-size:10px;background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent-border);border-radius:100px;padding:3px 10px;letter-spacing:.04em;}
+.timeline-pill.green{background:var(--green-dim);color:var(--green);border-color:var(--green-border);}
+.timeline-pill.amber{background:var(--amber-dim);color:var(--amber);border-color:var(--amber-border);}
+
+.moat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:48px;}
+.moat-card{background:var(--card-bg);padding:32px 28px;border:1px solid var(--border);transition:border-color .25s,background .25s;}
+.moat-card:hover{border-color:var(--accent-border);background:var(--bg3);}
+.moat-card:first-child{border-radius:10px 0 0 0;}
+.moat-card:nth-child(2){border-radius:0 10px 0 0;}
+.moat-card:nth-child(3){border-radius:0 0 0 10px;}
+.moat-card:last-child{border-radius:0 0 10px 0;}
+.moat-icon{font-size:20px;margin-bottom:14px;}
+.moat-title{font-size:15px;font-weight:700;margin-bottom:10px;}
+.moat-body{font-size:13px;font-weight:300;color:var(--text-dim);line-height:1.7;}
+
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px;}
+.team-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:24px 20px;transition:border-color .25s,transform .25s;}
+.team-card:hover{border-color:var(--accent-border);transform:translateY(-2px);}
+.team-initials{width:44px;height:44px;background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:14px;font-weight:700;color:var(--accent);margin-bottom:14px;}
+.team-name{font-size:15px;font-weight:700;margin-bottom:4px;}
+.team-role{font-size:11px;font-weight:600;color:var(--accent);margin-bottom:6px;letter-spacing:.02em;}
+.team-bio{font-size:12px;font-weight:300;color:var(--text-dim);line-height:1.55;}
+.team-link{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:11px;font-weight:500;color:var(--accent);text-decoration:none;font-family:'DM Mono',monospace;transition:opacity .2s;}
+.team-link:hover{opacity:.7;}
+
+.validation-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px;}
+.validation-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:24px 20px;transition:border-color .25s,transform .25s;}
+.validation-card:hover{border-color:var(--accent-border);transform:translateY(-2px);}
+.validation-badge{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.validation-badge::before{content:'';width:5px;height:5px;background:var(--accent);border-radius:50%;animation:dotPulse 2s infinite;}
+.validation-title{font-size:14px;font-weight:700;margin-bottom:8px;}
+.validation-body{font-size:12px;font-weight:300;color:var(--text-dim);line-height:1.65;}
+
+.contact-box{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:48px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+.contact-heading{font-size:22px;font-weight:700;margin-bottom:16px;}
+.contact-body{font-size:14px;font-weight:300;color:var(--text-dim);line-height:1.75;margin-bottom:24px;}
+.contact-detail{display:flex;flex-direction:column;gap:14px;}
+.contact-row{display:flex;gap:16px;align-items:flex-start;}
+.contact-row-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-sub);min-width:100px;padding-top:2px;}
+.contact-row-value{font-size:13px;font-weight:400;color:var(--text-dim);line-height:1.6;}
+.contact-row-value a{color:var(--accent);text-decoration:none;}
+.contact-row-value a:hover{text-decoration:underline;}
+
+footer{background:var(--bg);border-top:1px solid var(--border);padding:32px 48px;}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-copy{font-family:'DM Mono',monospace;font-size:11px;color:var(--text-sub);letter-spacing:.04em;}
+.footer-hand-link{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);text-decoration:none;}
+.footer-hand-link:hover{text-decoration:underline;}
+
+@media(max-width:900px){
+  nav{padding:0 24px;}
+  .nav-links{display:none;}
+  section,.hero{padding-left:24px;padding-right:24px;}
+  .metrics-bar{grid-template-columns:repeat(3,1fr);}
+  .forces-grid,.moat-grid,.contact-box{grid-template-columns:1fr;}
+  .team-grid,.validation-grid{grid-template-columns:1fr 1fr;}
+  footer{padding:32px 24px;}
+}
+@media(max-width:640px){
+  .team-grid,.validation-grid{grid-template-columns:1fr;}
+  .metrics-bar{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="" alt="Human &amp; Digital" id="nav-logo-img">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="hand-standard.html">The HAND Standard</a></li>
+    <li><a href="#">Pricing</a></li>
+    <li><a href="#" class="nav-cta">Request Deck</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="eyebrow">humandigital.tech &middot; Investor Relations &middot; Pre-Seed</div>
+  <h1>The infrastructure layer<br>the Cultural Industries<br><em>have been missing.</em></h1>
+  <p class="hero-sub">Human &amp; Digital is raising a pre-seed round to accelerate commercial services delivery, fund the first major customer engagements, and capitalize on a legislative and labor convergence that makes 2026 the inflection point for universal talent identification.</p>
+  <div class="disclaimer">This page is for informational purposes only and does not constitute an offer to sell or a solicitation of an offer to buy any securities. Investment inquiries are handled privately and under NDA.</div>
+  <div class="hero-actions">
+    <a href="#contact" class="btn-primary">Request Investor Deck</a>
+    <a href="#thesis" class="btn-ghost">Investment Thesis &rarr;</a>
+  </div>
+</section>
+
+<!-- METRICS BAR -->
+<div class="metrics-bar reveal">
+  <div class="metric">
+    <div class="metric-num"><em>145</em>K+</div>
+    <div class="metric-label">HAND IDs in the DOI<sup>&reg;</sup> registry</div>
+    <div class="metric-sub">As of Q1 2026</div>
+  </div>
+  <div class="metric">
+    <div class="metric-num"><em>10</em>M+</div>
+    <div class="metric-label">Citation-backed candidate records</div>
+    <div class="metric-sub">Verifiable sources &middot; not self-reported</div>
+  </div>
+  <div class="metric">
+    <div class="metric-num"><em>3</em>B+</div>
+    <div class="metric-label">DOI<sup>&reg;</sup> system resolutions / month</div>
+    <div class="metric-sub">AI agents resolving at machine scale</div>
+  </div>
+  <div class="metric">
+    <div class="metric-num"><em>34</em></div>
+    <div class="metric-label">Combined patents, founding team</div>
+    <div class="metric-sub">Media &middot; identity &middot; AI systems</div>
+  </div>
+  <div class="metric">
+    <div class="metric-num"><em>6</em>+</div>
+    <div class="metric-label">Startup exits across H&amp;D team</div>
+    <div class="metric-sub">Including M&amp;A and strategic acquisitions</div>
+  </div>
+</div>
+
+<!-- INVESTMENT THESIS -->
+<section style="background:var(--bg2);" id="thesis">
+  <div class="reveal">
+    <div class="section-label">Investment Thesis</div>
+    <h2 class="section-title">Four forces converging in 2026.<br><em>One infrastructure answer.</em></h2>
+    <p class="section-sub">The media and sports industries have solved content identification &mdash; EIDR, ISRC, ISBN are globally adopted standards. They have never solved talent identification at scale. Human &amp; Digital is the commercial layer that makes the HAND universal talent identifier viable in enterprise workflows &mdash; and 2026 is the first year the market conditions simultaneously demand it.</p>
+  </div>
+  <div class="forces-grid">
+    <div class="force-card sports reveal reveal-delay-1">
+      <div class="force-num">FORCE 01 &mdash; Sports &amp; NIL</div>
+      <div class="force-title">500,000 New Rights-Holders With No Infrastructure</div>
+      <div class="force-body">The NCAA NIL era created 500,000+ D1 athletes as individual rights-holders overnight. Every compliance department is drowning. Transfer portal, endorsement deals, AI likeness protections &mdash; all require verifiable, portable identity that survives school changes, conference realignments, and the turn-pro transition. Professional player associations across MLB, NFL, NBA, NHL, and international federations are simultaneously negotiating CBAs that will define AI likeness governance for the next decade. HAND is the neutral answer that no league or union controls &mdash; which is exactly why both sides can adopt it.</div>
+      <div class="force-pills">
+        <span class="force-pill green">500K+ NCAA D1 Athletes</span>
+        <span class="force-pill green">NIL Compliance Gap</span>
+        <span class="force-pill green">MLB CBA &mdash; Dec. 2026</span>
+        <span class="force-pill green">NFL &middot; NBA &middot; NHL PAs</span>
+      </div>
+    </div>
+    <div class="force-card reveal reveal-delay-2">
+      <div class="force-num">FORCE 02 &mdash; Legislative</div>
+      <div class="force-title">Active Law. Active Liability. Right Now.</div>
+      <div class="force-body">CA AB 1836 and AB 2602, NY S.8420-A and S.8391, and the federal NO FAKES Act create structural economic incentive for studios, platforms, and agencies to adopt verifiable talent IDs in commercial workflows. CPRA liability exposure for SSN-based identification is a direct driver affecting every organization that processes talent data in California. This is not anticipated regulation &mdash; it is active law creating active liability today.</div>
+      <div class="force-pills">
+        <span class="force-pill">CA AB 1836 / AB 2602</span>
+        <span class="force-pill">NY S.8420-A</span>
+        <span class="force-pill">NO FAKES Act</span>
+        <span class="force-pill">CPRA Enforcement</span>
+      </div>
+    </div>
+    <div class="force-card reveal reveal-delay-3">
+      <div class="force-num">FORCE 03 &mdash; AI Provenance</div>
+      <div class="force-title">C2PA Attests the File. HAND Attests Who Is In It.</div>
+      <div class="force-body">Synthetic media, AI-generated likenesses, and digital replicas have made talent identification a trust and authenticity crisis &mdash; not just an operational inefficiency. Provenance without resolution is a label on an empty box. C2PA and CAWG membership positions H&amp;D at the center of the content authenticity infrastructure being adopted by major platforms. HAND IDs are the talent-layer answer to the AI provenance crisis.</div>
+      <div class="force-pills">
+        <span class="force-pill">C2PA Member</span>
+        <span class="force-pill">CAWG Member</span>
+        <span class="force-pill">Type 02 Consent Chain</span>
+        <span class="force-pill">AI Governance Layer</span>
+      </div>
+    </div>
+    <div class="force-card reveal reveal-delay-4">
+      <div class="force-num">FORCE 04 &mdash; Labor &amp; CBA</div>
+      <div class="force-title">Both Sides of Every Negotiating Table Need This.</div>
+      <div class="force-body">Guilds, unions, and labor organizations across the Cultural Industries need a talent identifier that is not controlled by studios or platforms. Studios and rights holders need a talent identifier that is not controlled by labor. HAND is governed by an independent nonprofit &mdash; structurally neutral by design. That neutrality is not a talking point. It is the architectural reason both sides of every CBA negotiation can adopt HAND without conceding anything to the other side.</div>
+      <div class="force-pills">
+        <span class="force-pill">Nonprofit Governance</span>
+        <span class="force-pill">Neither Side Controls It</span>
+        <span class="force-pill">CBA-Ready Infrastructure</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKET TIMING / TIMELINE -->
+<section id="timing">
+  <div class="reveal">
+    <div class="section-label">Market Timing</div>
+    <h2 class="section-title">Why 2026 &mdash;<br><em>and not before.</em></h2>
+    <p class="section-sub">Three prior years of registry building, standards engagement, and institutional relationship development were necessary preconditions. The legislative and labor calendar of 2026 is the first moment all conditions are simultaneously met. This is not a startup that arrived early and is waiting for a market. The market arrived at the infrastructure.</p>
+  </div>
+  <div class="timeline">
+    <div class="timeline-entry reveal reveal-delay-1">
+      <div class="timeline-year">2022</div>
+      <div class="timeline-heading">Foundation &amp; Registry Launch</div>
+      <div class="timeline-body">H&amp;D founded. HAND registry launched on the DOI<sup>&reg;</sup> Foundation. 145K+ IDs issued from a citation-backed candidate pool of 10M+ verifiable public figures &mdash; built on Citation-Backed Notability&#8482;. DOI<sup>&reg;</sup> Registration Agency status confirmed. Deliberate decision to govern the standard through an independent nonprofit made from day one.</div>
+      <div class="timeline-pills">
+        <span class="timeline-pill">H&amp;D Founded</span>
+        <span class="timeline-pill">DOI<sup>&reg;</sup> RA Status</span>
+        <span class="timeline-pill">145K+ IDs Issued</span>
+        <span class="timeline-pill">Nonprofit Structure</span>
+      </div>
+    </div>
+    <div class="timeline-entry reveal reveal-delay-2">
+      <div class="timeline-year">2023</div>
+      <div class="timeline-heading">Standards Engagement &amp; Independent Validation</div>
+      <div class="timeline-body">C2PA and CAWG membership begins. Paul Jessop &mdash; former CTO of both IFPI and the RIAA, Executive Director of the US ISRC Agency, co-author of ISNI (ISO 27729) &mdash; publishes <em>A Manifesto for Creator Identification and Protection</em> in October. An independent, credentialed standards authority calling publicly for exactly the infrastructure HAND had already built. Sprockit Open Innovation cohort begins &mdash; corporate participants include Disney, Amazon, Sony, Paramount, NBCUniversal, and 40+ Fortune 500 M&amp;E companies.</div>
+      <div class="timeline-pills">
+        <span class="timeline-pill">C2PA Member</span>
+        <span class="timeline-pill">CAWG Member</span>
+        <span class="timeline-pill">Jessop Manifesto</span>
+        <span class="timeline-pill">Sprockit Cohort</span>
+      </div>
+    </div>
+    <div class="timeline-entry reveal reveal-delay-3">
+      <div class="timeline-year">2024</div>
+      <div class="timeline-heading">Legislative Groundwork &amp; Enterprise Engagement Begins</div>
+      <div class="timeline-body">CA AB 1836 (digital replica consent), AB 2602 (AI performance protections), NY S.8420-A and S.8391 signed into law. ISO 26324:2025 alignment confirmed. Active enterprise commercial engagement begins with a major Hollywood studio evaluating production-grade HAND ID integration into their global talent metadata infrastructure. SXSW Pitch 2025: H&amp;D selected Top 5 finalist of 589 applicants &mdash; the only US company in the Entertainment, Media, Sports &amp; Content category. Human Native AI, a cohort peer, was acquired by Cloudflare (NYSE: NET) within 10 months of the competition.</div>
+      <div class="timeline-pills">
+        <span class="timeline-pill">CA AB 1836 / AB 2602</span>
+        <span class="timeline-pill">NY S.8420-A</span>
+        <span class="timeline-pill">ISO 26324:2025</span>
+        <span class="timeline-pill">Major Studio Engagement</span>
+        <span class="timeline-pill">SXSW Top 5 of 589</span>
+      </div>
+    </div>
+    <div class="timeline-entry active reveal reveal-delay-4">
+      <div class="timeline-year">2025 &mdash; 2026</div>
+      <div class="timeline-heading">The Inflection Point &mdash; All Roads Converge</div>
+      <div class="timeline-body">Enterprise commercial engagement with a major Hollywood studio at production evaluation stage &mdash; details under NDA. 2025 MLB First Round Draft Class, NBA Draft Class, and Primetime Emmy Nominees all receive HAND IDs &mdash; the registry operating at scale, proactively, ahead of industry calendars. H&amp;D shortlisted for the 2026 Smarter Sports Awards in three categories (ceremony May 13, London), led by HAND Board Chairman Renard T. Jenkins. Renard T. Jenkins named first Board Chairman of HAND, January 2026. Raymond Drewry, Co-Founder of EIDR, joins HAND board. SAG-AFTRA / AMPTP negotiations active. MLBPA / MLB CBA expiring December 2026. NO FAKES Act federal momentum. NCAA NIL compliance urgency. CPRA enforcement active.</div>
+      <div class="timeline-pills">
+        <span class="timeline-pill green">MLB + NBA + Emmy IDs</span>
+        <span class="timeline-pill green">Smarter Sports 3x Shortlist</span>
+        <span class="timeline-pill green">Jenkins Board Chairman</span>
+        <span class="timeline-pill green">Drewry Board Member</span>
+        <span class="timeline-pill green">Enterprise Engagement (NDA)</span>
+        <span class="timeline-pill amber">SAG-AFTRA Negotiations Active</span>
+        <span class="timeline-pill amber">MLB CBA Expiring Dec. 2026</span>
+        <span class="timeline-pill amber">NO FAKES Act</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETITIVE MOAT -->
+<section style="background:var(--bg2);" id="moat">
+  <div class="reveal">
+    <div class="section-label">Competitive Position</div>
+    <h2 class="section-title">Why H&amp;D &mdash; and<br><em>why this is durable.</em></h2>
+    <p class="section-sub">H&amp;D&rsquo;s position is not a first-mover advantage that can be replicated by a well-funded competitor in 18 months. It is a structural moat built from standards governance, registry infrastructure, and institutional relationships that took years to establish and cannot be acquired.</p>
+  </div>
+  <div class="moat-grid">
+    <div class="moat-card reveal reveal-delay-1">
+      <div class="moat-icon">&#11041;</div>
+      <div class="moat-title">Nonprofit-governed standard &mdash; not acquirable</div>
+      <div class="moat-body">The HAND standard is governed by an independent nonprofit. No competitor can acquire or replicate the standard. A well-funded rival can build a competing product &mdash; they cannot build a competing standard with equivalent institutional trust. The DOI<sup>&reg;</sup> Foundation RA credential took years to establish and cannot be duplicated.</div>
+    </div>
+    <div class="moat-card reveal reveal-delay-2">
+      <div class="moat-icon">&#11080;</div>
+      <div class="moat-title">DOI<sup>&reg;</sup> Foundation registry &mdash; permanent infrastructure</div>
+      <div class="moat-body">HAND IDs are issued through the DOI<sup>&reg;</sup> Foundation &mdash; the same globally trusted infrastructure behind academic publishing, EIDR, and 3 billion monthly resolutions. 145K+ identifiers already issued and permanently resolvable. Built on verifiable notability, not scraped data or blue-checkmark proxies.</div>
+    </div>
+    <div class="moat-card reveal reveal-delay-3">
+      <div class="moat-icon">&#11095;</div>
+      <div class="moat-title">34 combined patents &mdash; deep technical IP</div>
+      <div class="moat-body">Will Kreth (3 patents) and John Carlucci (31 patents) bring combined IP across media supply-chain, identity systems, DRM, conditional access, and AI. This is not a thin services layer &mdash; it is a technically defensible position that took decades to build.</div>
+    </div>
+    <div class="moat-card reveal reveal-delay-4">
+      <div class="moat-icon">&#11036;</div>
+      <div class="moat-title">Institutional lineage &mdash; years in development</div>
+      <div class="moat-body">C2PA and CAWG membership. EIDR Co-Founder (Raymond Drewry) on the HAND board. Former President of SMPTE (Renard T. Jenkins) as Board Chairman. The person who co-authored ISNI (Paul Jessop) as a strategic advisor. These relationships are not replicable by a new entrant at any price.</div>
+    </div>
+    <div class="moat-card reveal reveal-delay-5">
+      <div class="moat-icon">&#127942;</div>
+      <div class="moat-title">Sports &amp; NIL &mdash; a vertical no competitor is addressing</div>
+      <div class="moat-body">500,000+ NCAA D1 athletes represent the largest unaddressed talent identity infrastructure gap in the Cultural Industries. H&amp;D is the only company approaching this market with standards-grade, neutral, portable infrastructure. The 2025 MLB and NBA draft class registrations demonstrate the registry operating at sports scale, proactively.</div>
+    </div>
+    <div class="moat-card reveal reveal-delay-6">
+      <div class="moat-icon">&#128200;</div>
+      <div class="moat-title">Fraud &amp; AML &mdash; a dimension competitors are missing</div>
+      <div class="moat-body">Steven Frank&rsquo;s Music Fights Fraud background adds an AML and fraud prevention dimension to HAND IDs that positions H&amp;D uniquely in streaming, royalty, and synthetic identity fraud contexts &mdash; a growing liability for every major platform and distributor that no identity-only competitor addresses.</div>
+    </div>
+  </div>
+</section>
+
+<!-- INDEPENDENT VALIDATION -->
+<section id="validation">
+  <div class="reveal">
+    <div class="section-label">Independent Validation</div>
+    <h2 class="section-title">Not analysts. Not press.<br><em>Decision-makers voting with their credentials.</em></h2>
+    <p class="section-sub">The most credible signal in a pre-seed round is not what the founders say about the company. It is what independent, unaffiliated decision-makers do. These are receipts.</p>
+  </div>
+  <div class="validation-grid">
+    <div class="validation-card reveal reveal-delay-1">
+      <div class="validation-badge">SXSW Pitch 2025</div>
+      <div class="validation-title">Top 5 of 589 Applicants</div>
+      <div class="validation-body">7.64% acceptance rate. Five finalists. H&amp;D was the only US company in the Entertainment, Media, Sports &amp; Content category. Human Native AI &mdash; a cohort peer from the same competition &mdash; was acquired by Cloudflare (NYSE: NET) in January 2026, less than 10 months after the competition. SXSW 2026 renamed the category to explicitly include &ldquo;Creator Content&rdquo; &mdash; HAND&rsquo;s exact space.</div>
+    </div>
+    <div class="validation-card reveal reveal-delay-2">
+      <div class="validation-badge">Sprockit Open Innovation</div>
+      <div class="validation-title">Current Cohort Member</div>
+      <div class="validation-body">Corporate participants include Disney, Amazon, Sony, Paramount, NBCUniversal, Fox, Google, Microsoft, WBD, MLB, NFL, Lionsgate, and 40+ Fortune 500 M&amp;E companies. Five confirmed events including a closed-door, invite-only session at NAB Las Vegas. Sprockit stakes its own reputation on every startup it presents. The invitation is the validation.</div>
+    </div>
+    <div class="validation-card reveal reveal-delay-3">
+      <div class="validation-badge">Smarter Sports Awards 2026</div>
+      <div class="validation-title">Three Shortlisted Categories</div>
+      <div class="validation-body">Shortlisted for three categories at the 2026 Smarter Sports Awards (ceremony May 13, London). Led by HAND Board Chairman Renard T. Jenkins &mdash; a 30+ year sports and media technology executive. The only talent identity infrastructure company in the shortlist across all three categories.</div>
+    </div>
+    <div class="validation-card reveal reveal-delay-4">
+      <div class="validation-badge">DBC Brand Communications</div>
+      <div class="validation-title">Equity Over Retainer</div>
+      <div class="validation-body">Bill Daddi &mdash; Founder &amp; CEO of a 20-year NYC boutique whose clients include LG Ad Solutions and the Media Rating Council &mdash; accepted an equity stake (0.25% YC standard) instead of a $10K&ndash;$20K/month cash retainer. PR firms do not work for equity in pre-seed startups. That convergence is not a discount. It is an independent, arm&rsquo;s-length enterprise valuation signal.</div>
+    </div>
+    <div class="validation-card reveal reveal-delay-5">
+      <div class="validation-badge">Paul Jessop &mdash; Oct. 2023</div>
+      <div class="validation-title">The Person Who Built ISNI Said It Publicly</div>
+      <div class="validation-body">Former CTO of IFPI and the RIAA, Executive Director of the US ISRC Agency, co-author of ISNI (ISO 27729). Published <em>A Manifesto for Creator Identification and Protection</em> &mdash; independently, under his own name, calling for exactly the infrastructure HAND had already built. He was among the first people Will Kreth brought into the conversation. Then he said it publicly.</div>
+    </div>
+    <div class="validation-card reveal reveal-delay-6">
+      <div class="validation-badge">Enterprise Commercial Engagement</div>
+      <div class="validation-title">Major Hollywood Studio &mdash; NDA</div>
+      <div class="validation-body">H&amp;D is in active commercial engagement with one of the world&rsquo;s largest film and television studios, evaluating production-grade integration of HAND IDs into their global talent metadata infrastructure. Enterprise-scale evaluation underway. Details available to qualified investors under NDA.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section style="background:var(--bg2);" id="team">
+  <div class="reveal">
+    <div class="section-label">Team Pedigree</div>
+    <h2 class="section-title">Not a team that discovered<br><em>the media industry from the outside.</em></h2>
+    <p class="section-sub">Every member brings domain-specific depth &mdash; in the standards bodies, platforms, guilds, and technology companies that define the Cultural Industries. This is the team the problem was waiting for.</p>
+    <div style="display:flex; gap:40px; margin-top:24px; flex-wrap:wrap;">
+      <div><span style="font-size:28px; font-weight:800; color:var(--accent);">34</span> <span style="font-size:13px; color:var(--text-dim);">Combined patents</span></div>
+      <div><span style="font-size:28px; font-weight:800; color:var(--accent);">6+</span> <span style="font-size:13px; color:var(--text-dim);">Startup exits</span></div>
+      <div><span style="font-size:13px; color:var(--text-sub); line-height:1.6;">Apple &middot; Google &middot; Microsoft &middot; Sony &middot; IBM &middot; Time Warner &middot; Showtime &middot; EIDR &middot; WIRED</span></div>
+    </div>
+  </div>
+  <div class="team-grid">
+    <div class="team-card reveal reveal-delay-1">
+      <div class="team-initials">WK</div>
+      <div class="team-name">Will Kreth</div>
+      <div class="team-role">Founder &amp; CEO</div>
+      <div class="team-bio">Ex-Executive Director, EIDR.org &middot; Director of Metadata Management, Showtime Networks &middot; Apple Multimedia Lab &middot; Time Warner Cable &middot; Founding team &amp; first employee, WIRED (1992) &middot; 4 startups &middot; 3 patents</div>
+      <a href="https://www.linkedin.com/in/willkreth" target="_blank" class="team-link">LinkedIn &rarr;</a>
+    </div>
+    <div class="team-card reveal reveal-delay-2">
+      <div class="team-initials">JC</div>
+      <div class="team-name">John Carlucci</div>
+      <div class="team-role">CTO</div>
+      <div class="team-bio">Ex-Sony &middot; Clearleap (acquired by IBM) &middot; 31 patents across media supply-chain, DRM, conditional access, AI &amp; identity systems &middot; MSEE, Cornell University</div>
+      <a href="https://www.linkedin.com/in/jbcarlucci/" target="_blank" class="team-link">LinkedIn &rarr;</a>
+    </div>
+    <div class="team-card reveal reveal-delay-3">
+      <div class="team-initials">GB</div>
+      <div class="team-name">Gabriel Berger</div>
+      <div class="team-role">CCO</div>
+      <div class="team-bio">Ex-CEO, Think Analytics &middot; 3 startup exits &middot; Deep media technology commercial leadership across global platforms</div>
+      <a href="https://www.linkedin.com/in/bergergabriel" target="_blank" class="team-link">LinkedIn &rarr;</a>
+    </div>
+    <div class="team-card reveal reveal-delay-4">
+      <div class="team-initials">WK</div>
+      <div class="team-name">Wynne Kim</div>
+      <div class="team-role">VP Data Policy &amp; Standards</div>
+      <div class="team-bio">Ex-Microsoft &middot; Google &middot; DoubleClick &middot; 1 startup exit &middot; 2 M&amp;A exits &middot; Policy and standards fluency across global platforms</div>
+      <a href="https://www.linkedin.com/in/wynnekim/" target="_blank" class="team-link">LinkedIn &rarr;</a>
+    </div>
+    <div class="team-card reveal reveal-delay-5">
+      <div class="team-initials">HM</div>
+      <div class="team-name">Helen Marzec</div>
+      <div class="team-role">VP Marketing Strategy</div>
+      <div class="team-bio">Behavioral economist &middot; Kauffman Fellow &middot; Translates complex identity infrastructure into market-facing narratives that resonate with enterprise buyers</div>
+      <a href="https://www.linkedin.com/in/helenmmarzec/" target="_blank" class="team-link">LinkedIn &rarr;</a>
+    </div>
+    <div class="team-card reveal reveal-delay-6">
+      <div class="team-initials">SF</div>
+      <div class="team-name">Steven Frank</div>
+      <div class="team-role">Fraud &amp; AML Prevention</div>
+      <div class="team-bio">Fraud &amp; AML prevention in highly-regulated industries &middot; Streaming music (Pandora) &middot; Co-creator, Music Fights Fraud coalition</div>
+      <a href="https://www.linkedin.com/in/steven-frank-9ab083b/" target="_blank" class="team-link">LinkedIn &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / REQUEST DECK -->
+<section id="contact">
+  <div class="reveal">
+    <div class="section-label">Investor Inquiries</div>
+    <h2 class="section-title">Request the<br><em>investor deck.</em></h2>
+  </div>
+  <div class="contact-box reveal reveal-delay-1">
+    <div>
+      <div class="contact-heading">We are actively in conversation with pre-seed investors.</div>
+      <p class="contact-body">If you are evaluating H&amp;D, please reach out directly. All materials &mdash; including the full investment memo, traction document, and IP licensing framework &mdash; are shared under mutual NDA. Conversations are handled personally by Will Kreth.</p>
+      <a href="/cdn-cgi/l/email-protection#3a53544c5f494e5548497a524f575b545e535d534e5b56144e5f5952" class="btn-primary"><span class="__cf_email__" data-cfemail="4821263e2d3b3c273a3b08203d2529262c212f213c2924663c2d2b20">[email&#160;protected]</span></a>
+    </div>
+    <div class="contact-detail">
+      <div class="contact-row">
+        <span class="contact-row-label">Primary Contact</span>
+        <span class="contact-row-value">Will Kreth &mdash; Founder &amp; CEO<br><a href="https://www.linkedin.com/in/willkreth" target="_blank">linkedin.com/in/willkreth</a></span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-row-label">Entity</span>
+        <span class="contact-row-value">Human &amp; Digital, Inc.<br>Delaware C-Corporation</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-row-label">Instrument</span>
+        <span class="contact-row-value">SAFE &mdash; details provided under NDA</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-row-label">Legal Counsel</span>
+        <span class="contact-row-value">King &amp; Spalding LLP (pro bono)</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-row-label">Email</span>
+        <span class="contact-row-value"><a href="/cdn-cgi/l/email-protection#dcb5b2aab9afa8b3aeaf9cb4a9b1bdb2b8b5bbb5a8bdb0f2a8b9bfb4"><span class="__cf_email__" data-cfemail="630a0d150610170c1110230b160e020d070a040a17020f4d1706000b">[email&#160;protected]</span></a></span>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:16px; font-family:'DM Mono',monospace; font-size:11px; color:var(--text-sub); line-height:1.6; max-width:680px;" class="reveal">
+    All investment materials are confidential and shared under mutual NDA. This page does not constitute a securities offering or solicitation. Human &amp; Digital, Inc. is a Delaware C-Corporation.
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-bottom">
+    <div>
+      <p style="font-family:'DM Mono',monospace; font-size:10px; color:var(--text-sub); margin-bottom:6px;">DOI<sup>&reg;</sup>, DOI.ORG<sup>&reg;</sup>, and short DOI<sup>&reg;</sup> are trademarks of the International DOI Foundation.</p>
+      <span class="footer-copy">&copy; 2026 Human &amp; Digital, Inc. &middot; humandigital.tech</span>
+    </div>
+    <a href="https://hand-id.org" class="footer-hand-link">&#11041; HAND &mdash; The Universal Talent Identifier &rarr; hand-id.org</a>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const markB64 =  + hd_logo + ;
+  document.getElementById('nav-logo-img').sr
