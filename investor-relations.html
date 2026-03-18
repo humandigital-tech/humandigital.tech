@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capital Inquiry &mdash; Human &amp; Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0f0f0f; --bg2:#161616; --bg3:#1e1e1e;
+  --border:rgba(255,255,255,0.08); --text:#f0f0f0;
+  --text-dim:#888; --text-sub:#555; --nav-bg:rgba(15,15,15,0.92);
+  --card-bg:#161616; --accent:#0066FF;
+  --accent-dim:rgba(0,102,255,0.12); --accent-border:rgba(0,102,255,0.3);
+  --green:#059669; --green-dim:rgba(5,150,105,0.1); --green-border:rgba(5,150,105,0.3);
+  --amber:#D97706; --amber-dim:rgba(217,119,6,0.1); --amber-border:rgba(217,119,6,0.3);
+  --red:#DC2626; --red-dim:rgba(220,38,38,0.08); --red-border:rgba(220,38,38,0.3);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes glowPulse{0%,100%{opacity:.07;}50%{opacity:.12;}}
+@keyframes navSlide{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
+@keyframes drawLine{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+
+.reveal{opacity:1;}
+@media(prefers-reduced-motion:reduce){.reveal,.reveal.visible{opacity:1;transform:none;transition:none;}}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(16px);background:var(--nav-bg);border-bottom:1px solid var(--border);padding:0 48px;height:64px;display:flex;align-items:center;justify-content:space-between;animation:navSlide .5s ease both;}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-logo img{height:32px;width:auto;}
+.nav-logo-text{font-size:15px;font-weight:700;color:var(--text);letter-spacing:-.01em;}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none;}
+.nav-links a{font-size:13px;font-weight:500;letter-spacing:.04em;color:var(--text-dim);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--text);}
+.nav-cta{background:var(--accent);color:#fff!important;padding:8px 20px;border-radius:6px;font-weight:600!important;transition:opacity .2s!important;}
+.nav-cta:hover{opacity:.85;}
+
+/* HERO */
+.hero{min-height:80vh;display:flex;flex-direction:column;justify-content:center;padding:120px 48px 80px;position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
+.hero-glow{position:absolute;top:-200px;right:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(0,102,255,.07) 0%,transparent 70%);pointer-events:none;animation:glowPulse 8s ease-in-out infinite;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:.4;pointer-events:none;}
+.eyebrow{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:24px;display:flex;align-items:center;gap:12px;animation:fadeIn .8s ease .3s both;}
+.eyebrow::before{content:'';width:32px;height:1px;background:var(--accent);animation:drawLine .6s ease .5s both;transform-origin:left;}
+.hero h1{font-size:clamp(36px,5vw,64px);font-weight:700;line-height:1.06;letter-spacing:-.025em;max-width:820px;margin-bottom:28px;animation:fadeUp .8s cubic-bezier(.22,1,.36,1) .4s both;}
+.hero h1 em{font-style:normal;color:var(--accent);}
+.hero-sub{font-size:clamp(15px,1.8vw,18px);font-weight:300;color:var(--text-dim);max-width:600px;line-height:1.75;margin-bottom:40px;animation:fadeUp .8s cubic-bezier(.22,1,.36,1) .55s both;}
+
+/* TRUTHS */
+.truths{padding:80px 48px;border-bottom:1px solid var(--border);}
+.section-label{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;}
+.section-title{font-size:clamp(24px,3vw,40px);font-weight:700;letter-spacing:-.022em;line-height:1.1;margin-bottom:40px;}
+.section-title em{font-style:normal;color:var(--accent);}
+.truths-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;}
+.truth-card{background:var(--card-bg);padding:32px 28px;border:1px solid var(--border);transition:border-color .25s;}
+.truth-card:hover{border-color:var(--accent-border);}
+.truth-num{font-family:'DM Mono',monospace;font-size:10px;color:var(--text-sub);letter-spacing:.1em;margin-bottom:14px;}
+.truth-heading{font-size:17px;font-weight:700;margin-bottom:10px;line-height:1.3;}
+.truth-body{font-size:13px;font-weight:300;color:var(--text-dim);line-height:1.7;}
+
+/* URGENCY */
+.urgency{padding:80px 48px;background:var(--bg2);border-bottom:1px solid var(--border);}
+.urgency-items{display:flex;flex-direction:column;gap:0;margin-top:40px;border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.urgency-item{display:flex;align-items:flex-start;gap:24px;padding:24px 28px;border-bottom:1px solid var(--border);background:var(--card-bg);transition:background .2s;}
+.urgency-item:last-child{border-bottom:none;}
+.urgency-item:hover{background:var(--bg3);}
+.urgency-dot{width:8px;height:8px;border-radius:50%;background:var(--amber);flex-shrink:0;margin-top:6px;animation:pulse 2s infinite;}
+.urgency-dot.red{background:var(--red);}
+.urgency-dot.green{background:var(--green);animation:none;}
+.urgency-text{font-size:14px;font-weight:400;color:var(--text-dim);line-height:1.6;}
+.urgency-text strong{color:var(--text);font-weight:600;}
+
+/* FORM */
+.contact{padding:80px 48px;border-bottom:1px solid var(--border);}
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;max-width:1000px;}
+.contact-intro h2{font-size:clamp(24px,3vw,38px);font-weight:700;letter-spacing:-.022em;line-height:1.1;margin-bottom:16px;}
+.contact-intro h2 em{font-style:normal;color:var(--accent);}
+.contact-intro p{font-size:14px;font-weight:300;color:var(--text-dim);line-height:1.75;margin-bottom:0;}
+.contact-note{font-family:'DM Mono',monospace;font-size:11px;color:var(--text-sub);margin-top:24px;line-height:1.6;border-top:1px solid var(--border);padding-top:20px;}
+
+/* FORM STYLES */
+.inquiry-form{display:flex;flex-direction:column;gap:20px;}
+.form-field{display:flex;flex-direction:column;gap:8px;}
+.form-label{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);}
+.form-label span{color:var(--red);margin-left:2px;}
+.form-input,.form-select,.form-textarea{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:12px 16px;font-family:'Manrope',sans-serif;font-size:14px;color:var(--text);outline:none;transition:border-color .2s,background .2s;width:100%;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--accent);background:var(--bg3);}
+.form-input.error,.form-select.error,.form-textarea.error{border-color:var(--red);}
+.form-select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23555' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;}
+.form-select option{background:var(--bg2);}
+.form-textarea{resize:vertical;min-height:100px;line-height:1.6;}
+.form-error{font-size:12px;color:var(--red);margin-top:4px;display:none;}
+.form-error.visible{display:block;}
+.form-submit{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:14px 28px;font-family:'Manrope',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:opacity .2s,transform .2s;letter-spacing:.01em;}
+.form-submit:hover{opacity:.88;transform:translateY(-1px);}
+.form-submit:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+
+/* SUCCESS STATE */
+.form-success{display:none;background:var(--green-dim);border:1px solid var(--green-border);border-radius:10px;padding:32px;text-align:center;}
+.form-success.visible{display:block;}
+.form-success-icon{font-size:32px;margin-bottom:16px;}
+.form-success-title{font-size:18px;font-weight:700;margin-bottom:10px;}
+.form-success-body{font-size:14px;font-weight:300;color:var(--text-dim);line-height:1.7;}
+
+/* FOOTER */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:32px 48px;}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-copy{font-family:'DM Mono',monospace;font-size:11px;color:var(--text-sub);letter-spacing:.04em;}
+.footer-hand-link{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);text-decoration:none;}
+.footer-hand-link:hover{text-decoration:underline;}
+
+@media(max-width:900px){
+  nav{padding:0 24px;}
+  .nav-links{display:none;}
+  .hero,.truths,.urgency,.contact{padding-left:24px;padding-right:24px;}
+  .truths-grid{grid-template-columns:1fr;}
+  .contact-wrap{grid-template-columns:1fr;gap:40px;}
+  footer{padding:32px 24px;}
+}
+</style>
+</head>
+<body>
+<script>document.addEventListener("DOMContentLoaded",function(){document.body.classList.add("js-loaded");});</script>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="" alt="Human &amp; Digital" id="nav-logo-img">
+    <span class="nav-logo-text">Human &amp; Digital</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="hand-standard.html">The HAND Standard</a></li>
+    <li><a href="#inquiry" class="nav-cta">Inquire</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="eyebrow">Capital Inquiry &middot; Human &amp; Digital, Inc.</div>
+  <h1>The window is open.<br><em>The window will close.</em></h1>
+  <p class="hero-sub">Human &amp; Digital is building the identity infrastructure the Cultural Industries have needed for decades. Pre-seed. The conditions that make 2026 the inflection point are not permanent. Qualified inquiries are reviewed personally by the founder.</p>
+</section>
+
+<!-- IMMUTABLE TRUTHS -->
+<section class="truths">
+  <div class="section-label">Why This. Why Now.</div>
+  <h2 class="section-title">Four things that are<br><em>simply true.</em></h2>
+  <div class="truths-grid">
+    <div class="truth-card">
+      <div class="truth-num">TRUTH 01</div>
+      <div class="truth-heading">The problem has been acknowledged by the industry for years. No one has solved it.</div>
+      <div class="truth-body">Content identification has EIDR, ISRC, ISBN. Talent identification has nothing globally interoperable, neutral, and persistent. Human &amp; Digital built it.</div>
+    </div>
+    <div class="truth-card">
+      <div class="truth-num">TRUTH 02</div>
+      <div class="truth-heading">The infrastructure is real. The registry is live. The standard is independent.</div>
+      <div class="truth-body">145,000+ HAND IDs issued. DOI&reg; Foundation Registration Agency status. Governed by an independent nonprofit. Not a pitch deck — an operating system for talent identity.</div>
+    </div>
+    <div class="truth-card">
+      <div class="truth-num">TRUTH 03</div>
+      <div class="truth-heading">2026 is the first year every market condition is simultaneously present.</div>
+      <div class="truth-body">Active legislation. AI rights crisis. NIL compliance gaps. Labor negotiations. C2PA adoption. These forces do not converge twice. This is not a company waiting for a market — the market arrived at the infrastructure.</div>
+    </div>
+    <div class="truth-card">
+      <div class="truth-num">TRUTH 04</div>
+      <div class="truth-heading">The team built this industry. They did not discover it from the outside.</div>
+      <div class="truth-body">Founders of EIDR, WIRED, and standards bodies across the media supply chain. 34 combined patents. This is domain depth that cannot be hired or acquired in a funding round.</div>
+    </div>
+  </div>
+</section>
+
+<!-- URGENCY -->
+<section class="urgency">
+  <div class="section-label">The Clock</div>
+  <h2 class="section-title">Deadlines that do not<br><em>move for anyone.</em></h2>
+  <div class="urgency-items">
+    <div class="urgency-item">
+      <div class="urgency-dot red"></div>
+      <div class="urgency-text"><strong>MLB CBA expiration — December 2026.</strong> The next collective bargaining agreement will define AI likeness governance for a generation. The window to establish HAND as the neutral identity standard for both sides is open now.</div>
+    </div>
+    <div class="urgency-item">
+      <div class="urgency-dot"></div>
+      <div class="urgency-text"><strong>SAG-AFTRA / AMPTP AI negotiations — active.</strong> Every major guild negotiation now includes AI likeness provisions. Infrastructure that is not in the conversation today will not be adopted by contract tomorrow.</div>
+    </div>
+    <div class="urgency-item">
+      <div class="urgency-dot"></div>
+      <div class="urgency-text"><strong>CA AB 1836, AB 2602, NY S.8420-A — active law, active liability.</strong> Studios and platforms are managing compliance exposure today. HAND IDs are the technical answer to verifiable talent consent and attribution.</div>
+    </div>
+    <div class="urgency-item">
+      <div class="urgency-dot"></div>
+      <div class="urgency-text"><strong>500,000+ NCAA D1 athletes as rights-holders — no infrastructure.</strong> NIL created the largest unaddressed talent identity gap in sports overnight. The compliance burden is real and growing every transfer portal cycle.</div>
+    </div>
+    <div class="urgency-item">
+      <div class="urgency-dot green"></div>
+      <div class="urgency-text"><strong>Independent validation — confirmed.</strong> Top 5 of 589 at SXSW. Sprockit Open Innovation cohort. Three shortlisted categories at the 2026 Smarter Sports Awards. The market has already spoken. We are raising to meet it.</div>
+    </div>
+  </div>
+</section>
+
+<!-- INQUIRY FORM -->
+<section class="contact" id="inquiry">
+  <div class="contact-wrap">
+    <div class="contact-intro">
+      <div class="section-label">Qualified Inquiries</div>
+      <h2>If you're reading this,<br><em>something brought you here.</em></h2>
+      <p>Investment materials &mdash; including the full memo, traction document, and IP framework &mdash; are shared personally and privately. This form is the first step. Human &amp; Digital reviews every submission.</p>
+      <div class="contact-note">
+        Corporate email required. Materials shared under mutual NDA.<br>
+        Human &amp; Digital, Inc. &mdash; Delaware C-Corporation &mdash; Pre-Seed SAFE.<br>
+        This page does not constitute a securities offering or solicitation.
+      </div>
+    </div>
+    <div>
+      <form class="inquiry-form" id="inquiryForm" name="capital-inquiry" netlify netlify-honeypot="bot-field" novalidate>
+        <input type="hidden" name="form-name" value="capital-inquiry">
+        <p style="display:none;"><input name="bot-field"></p>
+        <div class="form-field">
+          <label class="form-label" for="name">Full Name<span>*</span></label>
+          <input class="form-input" type="text" id="name" name="name" placeholder="Your full name" required>
+          <div class="form-error" id="nameError">Please enter your full name.</div>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="email">Corporate Email<span>*</span></label>
+          <input class="form-input" type="email" id="email" name="email" placeholder="you@yourcompany.com" required>
+          <div class="form-error" id="emailError">Please use a corporate email address — not Gmail, Yahoo, or other personal domains.</div>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="org">Organization<span>*</span></label>
+          <input class="form-input" type="text" id="org" name="org" placeholder="Your company or fund" required>
+          <div class="form-error" id="orgError">Please enter your organization.</div>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="role">Your Role<span>*</span></label>
+          <select class="form-select" id="role" name="role" required>
+            <option value="" disabled selected>Select your role</option>
+            <option value="investor-vc">Venture Capital / Seed Investor</option>
+            <option value="investor-angel">Angel Investor</option>
+            <option value="investor-strategic">Strategic / Corporate Investor</option>
+            <option value="partner-enterprise">Enterprise Partner / Customer</option>
+            <option value="partner-media">Media &amp; Entertainment Executive</option>
+            <option value="partner-sports">Sports Industry / League Executive</option>
+            <option value="other">Other</option>
+          </select>
+          <div class="form-error" id="roleError">Please select your role.</div>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="context">What brings you here?<span>*</span></label>
+          <textarea class="form-textarea" id="context" name="context" placeholder="Brief context — how you found H&D, what you're evaluating, or what you'd like to discuss." required></textarea>
+          <div class="form-error" id="contextError">Please share a brief note.</div>
+        </div>
+        <button type="submit" class="form-submit" id="submitBtn">Submit Inquiry &rarr;</button>
+      </form>
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-icon">&#10003;</div>
+        <div class="form-success-title">Inquiry received.</div>
+        <div class="form-success-body">Human &amp; Digital reviews all submissions. Qualified inquiries receive a direct response. If the fit is right, the next step will be a private conversation.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-bottom">
+    <div>
+      <p style="font-family:'DM Mono',monospace; font-size:10px; color:var(--text-sub); margin-bottom:6px;">DOI<sup>&reg;</sup> and DOI.ORG<sup>&reg;</sup> are registered trademarks of the International DOI Foundation.</p>
+      <span class="footer-copy">&copy; 2026 Human &amp; Digital, Inc. &middot; humandigital.tech</span>
+    </div>
+    <a href="https://hand-id.org" class="footer-hand-link">&#11041; HAND &mdash; The Universal Talent Identifier &rarr; hand-id.org</a>
+  </div>
+</footer>
+
+<script>
+  // ── LOGO ──
+  const markB64 = '/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAEsKADAAQAAAABAAAEsAAAAAD/7QA4UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAAA4QklNBCUAAAAAABDUHYzZjwCyBOmACZjs+EJ+/+AAEEd4aWYAAE1NACoAAAAIAAAAAAAAAAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
+  // Logo placeholder — replace with actual base64 if needed
+  // document.getElementById('nav-logo-img').src = 'data:image/jpeg;base64,' + markB64;
+
+  // ── CORPORATE EMAIL VALIDATION ──
+  const blockedDomains = [
+    'gmail.com','yahoo.com','yahoo.co.uk','yahoo.co.in','hotmail.com','hotmail.co.uk',
+    'outlook.com','live.com','msn.com','icloud.com','me.com','mac.com',
+    'aol.com','protonmail.com','proton.me','tutanota.com','tutamail.com',
+    'zoho.com','mail.com','gmx.com','gmx.net','yandex.com','yandex.ru',
+    'qq.com','163.com','126.com','sina.com','foxmail.com','fastmail.com',
+    'hey.com','substack.com'
+  ];
+
+  function isCorporateEmail(email) {
+    const domain = email.split('@')[1];
+    if (!domain) return false;
+    return !blockedDomains.includes(domain.toLowerCase());
+  }
+
+  // ── FORM HANDLING ──
+  const form = document.getElementById('inquiryForm');
+  const success = document.getElementById('formSuccess');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    let valid = true;
+
+    // Name
+    const name = document.getElementById('name');
+    const nameErr = document.getElementById('nameError');
+    if (!name.value.trim()) {
+      name.classList.add('error'); nameErr.classList.add('visible'); valid = false;
+    } else {
+      name.classList.remove('error'); nameErr.classList.remove('visible');
+    }
+
+    // Email
+    const email = document.getElementById('email');
+    const emailErr = document.getElementById('emailError');
+    if (!email.value.trim() || !email.value.includes('@') || !isCorporateEmail(email.value)) {
+      email.classList.add('error'); emailErr.classList.add('visible'); valid = false;
+    } else {
+      email.classList.remove('error'); emailErr.classList.remove('visible');
+    }
+
+    // Org
+    const org = document.getElementById('org');
+    const orgErr = document.getElementById('orgError');
+    if (!org.value.trim()) {
+      org.classList.add('error'); orgErr.classList.add('visible'); valid = false;
+    } else {
+      org.classList.remove('error'); orgErr.classList.remove('visible');
+    }
+
+    // Role
+    const role = document.getElementById('role');
+    const roleErr = document.getElementById('roleError');
+    if (!role.value) {
+      role.classList.add('error'); roleErr.classList.add('visible'); valid = false;
+    } else {
+      role.classList.remove('error'); roleErr.classList.remove('visible');
+    }
+
+    // Context
+    const context = document.getElementById('context');
+    const contextErr = document.getElementById('contextError');
+    if (!context.value.trim() || context.value.trim().length < 20) {
+      context.classList.add('error'); contextErr.classList.add('visible'); valid = false;
+    } else {
+      context.classList.remove('error'); contextErr.classList.remove('visible');
+    }
+
+    if (valid) {
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+
+      // Submit to Netlify Forms
+      const formData = new FormData();
+      formData.append('form-name', 'capital-inquiry');
+      formData.append('name', name.value.trim());
+      formData.append('email', email.value.trim());
+      formData.append('org', org.value.trim());
+      formData.append('role', role.value);
+      formData.append('context', context.value.trim());
+
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString()
+      })
+      .then(function() {
+        form.style.display = 'none';
+        success.classList.add('visible');
+      })
+      .catch(function(error) {
+        btn.disabled = false;
+        btn.textContent = 'Submit Inquiry →';
+        alert('Something went wrong. Please try again or email us directly.');
+        console.error('Form error:', error);
+      });
+    }
+  });
+
+  // Clear errors on input
+  ['name','email','org','role','context'].forEach(function(id) {
+    const el = document.getElementById(id);
+    el.addEventListener('input', function() {
+      el.classList.remove('error');
+      document.getElementById(id + 'Error').classList.remove('visible');
+    });
+  });
+</script>
+</body>
+</html>
