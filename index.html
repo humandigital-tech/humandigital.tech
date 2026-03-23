@@ -470,7 +470,21 @@
   @media (max-width: 900px) {
     nav { padding: 0 24px; }
     .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
     section, .hero { padding-left: 24px; padding-right: 24px; }
+    .hero {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+      min-height: auto;
+      padding: 80px 24px 48px;
+    }
+    .hero-content { grid-column: 1; grid-row: 1; }
+    .hero-image-wrap {
+      grid-column: 1; grid-row: 2;
+      margin-top: 40px;
+      max-width: 100%;
+    }
+    .hero-image-wrap img { max-width: 100%; }
     .bridge-inner, .manifesto-inner { grid-template-columns: 1fr; gap: 40px; }
     .footer-top { grid-template-columns: 1fr 1fr; }
     .hero-stats { display: none; }
@@ -493,6 +507,62 @@
   @media (max-width: 640px) {
     .tam-beat:hover { letter-spacing: 0.12em; }
   }
+
+  /* ── HAMBURGER NAV (mobile) ── */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: rgba(255,255,255,0.8);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    border-radius: 2px;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-mobile-menu {
+    display: none;
+    position: fixed;
+    top: 64px;
+    left: 0; right: 0;
+    background: rgba(10,10,10,0.98);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    z-index: 199;
+    padding: 16px 24px 24px;
+    backdrop-filter: blur(16px);
+  }
+  .nav-mobile-menu.open { display: block; }
+  .nav-mobile-menu ul {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .nav-mobile-menu ul li a {
+    display: block;
+    padding: 14px 0;
+    font-size: 17px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    transition: color 0.2s;
+  }
+  .nav-mobile-menu ul li:last-child a { border-bottom: none; }
+  .nav-mobile-menu ul li a:hover { color: #fff; }
+  .nav-mobile-menu ul li a.nav-cta {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
 </style>
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-400F6Q6CXT"></script>
@@ -519,7 +589,19 @@
     <li><a href="investor-relations.html">Investors</a></li>
     <li><a href="#contact" class="nav-cta">Let&rsquo;s Talk</a></li>
   </ul>
+  <button class="nav-hamburger" id="hd-hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="nav-mobile-menu" id="hd-mobile-menu">
+  <ul>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#hand">The HAND Standard</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="investor-relations.html">Investors</a></li>
+    <li><a href="#contact" class="nav-cta">Let&rsquo;s Talk</a></li>
+  </ul>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -999,6 +1081,22 @@
     <a href="https://hand-id.org" class="footer-hand-link">&#11041; HAND &mdash; The Universal Talent Identifier &rarr; hand-id.org</a>
   </div>
 </footer>
+
+<script>
+  // ── HAMBURGER NAV ──
+  const hdHamburger = document.getElementById('hd-hamburger');
+  const hdMobileMenu = document.getElementById('hd-mobile-menu');
+  hdHamburger.addEventListener('click', () => {
+    hdHamburger.classList.toggle('open');
+    hdMobileMenu.classList.toggle('open');
+  });
+  hdMobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hdHamburger.classList.remove('open');
+      hdMobileMenu.classList.remove('open');
+    });
+  });
+</script>
 
 <!-- Scroll reveal -->
 <script>
