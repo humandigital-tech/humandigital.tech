@@ -250,8 +250,9 @@
   .standard-item {
     font-size: 15px; font-weight: 500; color: var(--text-dim);
     letter-spacing: 0.02em; transition: color 0.2s; white-space: nowrap;
+    text-decoration: none; cursor: pointer;
   }
-  .standard-item:hover { color: var(--text); }
+  .standard-item:hover { color: var(--accent); }
 
   /* ── SECTION SHARED ── */
   section { padding: 100px 48px; }
@@ -492,14 +493,14 @@
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="index.html">
-    <img src="" alt="Human &amp; Digital" id="nav-logo-img">
+  <a class="nav-logo" href="/">
+    <img src="/images/hd-logo.webp" alt="Human &amp; Digital" id="nav-logo-img">
   </a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
     <li><a href="#hand">The HAND Standard</a></li>
     <li><a href="#team">Team</a></li>
-    <li><a href="investor-relations.html" class="nav-cta">Inquire</a></li>
+    <li><a href="#contact" class="nav-cta">Let&rsquo;s Talk</a></li>
   </ul>
 </nav>
 
@@ -510,10 +511,11 @@
   <div class="hero-content">
     <div class="hero-eyebrow">Media Technology &middot; Founded 2022</div>
     <h1 class="hero-headline">
-      <span style="display:block;">Three versions.</span><span style="display:block;">One human.</span><em style="display:block; line-height:1.15; margin-top:0.1em;">The law can&rsquo;t tell them apart &mdash; but we can.</em>
+      <span style="display:block;">Identify.</span><span style="display:block;">Attribute.</span><span style="display:block;">Monetize.</span>
     </h1>
+    <div style="font-family:'DM Mono',monospace; font-size:11px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:20px;">Trust &nbsp;&middot;&nbsp; Automation &nbsp;&middot;&nbsp; Measurement</div>
     <p class="hero-sub">
-      Human &amp; Digital delivers identity intelligence and data services for notable public figures in Cultural Industries &mdash; Athletes, Actors, Creators, Producers, Directors, Musicians, Voice Artists, and both the legal replicas and fictional characters they bring to life.
+      Human &amp; Digital delivers <span style="color:var(--accent); font-weight:600;">Identity Intelligence</span> and data services for notable public figures in Cultural Industries &mdash; Athletes, Actors, Creators, Producers, Directors, Musicians, Voice Artists, and both the legal likenesses and fictional characters they bring to life.
     </p>
     <div class="hero-actions">
       <a href="#services" class="btn-primary">Explore Services</a>
@@ -535,7 +537,7 @@
     </div>
   </div>
   <div class="hero-image-wrap">
-    <img src="/images/HD.HERO.IMAGE.webp" alt="Human &amp; Digital — Three versions. One human." style="width:100%;max-width:640px;height:auto;display:block;border-radius:16px;">
+    <img src="/images/hd-hero-image.webp" alt="Human &amp; Digital — Identify. Attribute. Monetize." style="width:100%;max-width:640px;height:auto;display:block;border-radius:16px;">
   </div>
 </section>
 
@@ -545,13 +547,13 @@
     <span class="standards-label">Standards &amp; Affiliations</span>
     <div class="standards-divider"></div>
     <div class="standards-items">
-      <span class="standard-item">C2PA</span>
-      <span class="standard-item">CAWG</span>
-      <span class="standard-item">EIDR</span>
-      <span class="standard-item">IPTC</span>
-      <span class="standard-item">DPP</span>
-      <span class="standard-item">DOI Foundation</span>
-      <span class="standard-item">ISO 26324:2025</span>
+      <a href="https://c2pa.org" target="_blank" rel="noopener" class="standard-item">C2PA</a>
+      <a href="https://cawg.io" target="_blank" rel="noopener" class="standard-item">CAWG</a>
+      <a href="https://eidr.org" target="_blank" rel="noopener" class="standard-item">EIDR</a>
+      <a href="https://iptc.org" target="_blank" rel="noopener" class="standard-item">IPTC</a>
+      <a href="https://www.thedpp.com" target="_blank" rel="noopener" class="standard-item">DPP</a>
+      <a href="https://www.doi.org" target="_blank" rel="noopener" class="standard-item">DOI Foundation</a>
+      <a href="https://www.iso.org/standard/88862.html" target="_blank" rel="noopener" class="standard-item">ISO 26324:2025</a>
     </div>
   </div>
 </div>
@@ -587,7 +589,7 @@
     <div class="serve-card reveal reveal-delay-5">
       <div class="serve-icon">&#127918;</div>
       <div class="serve-name">Gaming &amp; Virtual</div>
-      <div class="serve-desc">Esports athletes, virtual humans, AI-generated personas, legal replicas, and the fictional characters that drive franchise value.</div>
+      <div class="serve-desc">Esports athletes, virtual humans, AI-generated personas, legal likenesses, and the fictional characters that drive franchise value.</div>
     </div>
     <div class="serve-card reveal reveal-delay-6">
       <div class="serve-icon">&#127917;</div>
@@ -595,6 +597,15 @@
       <div class="serve-desc">Theatre, dance, comedy, and live performance artists &mdash; the full creative spectrum, from Broadway to touring productions worldwide.</div>
     </div>
   </div>
+
+  <!-- Clyde Smith pull quote -->
+  <div class="reveal" style="max-width:780px; margin:56px auto 0; padding:0 48px 64px;">
+    <div style="border-left:3px solid var(--accent); padding-left:28px;">
+      <p style="font-size:19px; font-weight:400; color:var(--text); line-height:1.65; font-style:italic; margin:0 0 16px;">&ldquo;If you can&rsquo;t identify it, you can&rsquo;t operationalize or measure it. If you can&rsquo;t measure it &mdash; you can&rsquo;t monetize it.&rdquo;</p>
+      <p style="font-family:'DM Mono',monospace; font-size:11px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-dim); margin:0;">Clyde Smith &nbsp;&middot;&nbsp; SVP, Advanced Technology &nbsp;&middot;&nbsp; Fox Network Engineering &amp; Operations</p>
+    </div>
+  </div>
+
 </section>
 
 <!-- SERVICES -->
@@ -674,7 +685,7 @@
     </div>
   </div>
   <div style="text-align:center; margin-top:48px; padding-bottom:8px;" class="reveal">
-    <a href="#contact" class="btn-primary" style="font-size:15px; background:var(--accent);">The window is open. Let&rsquo;s Talk &rarr;</a>
+    <a href="#contact" class="btn-primary" style="font-size:15px;">The window is open. Let&rsquo;s Talk &rarr;</a>
   </div>
 </section>
 
@@ -796,7 +807,7 @@
       <div class="team-name">Jeff F. King</div>
       <div class="team-role">Advisor &amp; Angel Investor &middot; Partnerships</div>
       <div class="team-bio">Hollywood producer, writer &amp; director &middot; CAA client &middot; Holds a HAND ID &middot; Creative community signal and relationships</div>
-      <a href="https://registry.handidentity.com/?_gl=1*1ejgpy3*_ga*MTIxNzc3NDI4Ni4xNzM0NDk5ODI3*_ga_R59GKM7XY0*czE3NzM4MDg4ODgkbzU2JGcxJHQxNzczODA4ODk1JGo1MyRsMCRoMA..#objects/10.23/CB18-1C58-DAFA-62BD-E983" target="_blank" class="team-linkedin" style="color:var(--accent);">
+      <a href="https://registry.handidentity.com/#objects/10.23/CB18-1C58-DAFA-62BD-E983" target="_blank" class="team-linkedin" style="color:var(--accent);">
         <span style="font-size:12px; font-weight:700; background:var(--accent); color:#000; padding:1px 5px; border-radius:3px; letter-spacing:.04em;">H</span>
         HAND ID
       </a>
@@ -814,34 +825,147 @@
   </div>
 </section>
 
-<!-- CTA BAND -->
-<section class="cta-band reveal">
-  <div class="section-label">Get Started</div>
-  <h2 class="section-title">Ready to put HAND IDs to work for your talent roster?</h2>
-  <p class="section-sub">Whether you&rsquo;re a rights holder, talent agency, platform, or guild &mdash; we have a service tier designed for your workflow. Participation in new media economies happens by choice, not by default.</p>
-  <div class="cta-actions" style="margin-top:40px;">
-    <a href="investor-relations.html" class="btn-primary">Inquire &rarr;</a>
+<!-- CONTACT FORM -->
+<section id="contact" style="padding:64px 48px; background:var(--bg2); border-top:1px solid var(--border);">
+  <div style="max-width:600px; margin:0 auto;">
+
+    <div class="section-label reveal">Get In Touch</div>
+    <h2 class="section-title reveal" style="margin-bottom:16px;">Let&rsquo;s Talk</h2>
+    <p class="reveal" style="font-size:15px; color:var(--text-dim); line-height:1.7; margin-bottom:32px;">Human &amp; Digital works with organizations that are serious about identity infrastructure. Tell us who you are and what brought you here.</p>
+
+    <!-- Netlify form -->
+    <form name="hd-contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="hd-contact-form"
+      style="display:flex; flex-direction:column; gap:20px;">
+
+      <!-- Honeypot — hidden from humans, Netlify uses it to catch bots -->
+      <input type="hidden" name="form-name" value="hd-contact">
+      <p style="display:none;"><label>Don&rsquo;t fill this out: <input name="bot-field"></label></p>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+        <div>
+          <label for="hd-name" style="display:block; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--text-sub); margin-bottom:8px;">Full Name</label>
+          <input type="text" id="hd-name" name="name" required placeholder="Jane Smith"
+            style="width:100%; background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:14px 16px; font-family:'Manrope',sans-serif; font-size:15px; color:var(--text); outline:none; transition:border-color .2s;"
+            onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+        </div>
+        <div>
+          <label for="hd-org" style="display:block; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--text-sub); margin-bottom:8px;">Organization</label>
+          <input type="text" id="hd-org" name="organization" required placeholder="Acme Studios"
+            style="width:100%; background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:14px 16px; font-family:'Manrope',sans-serif; font-size:15px; color:var(--text); outline:none; transition:border-color .2s;"
+            onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+        </div>
+      </div>
+
+      <div>
+        <label for="hd-email" style="display:block; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--text-sub); margin-bottom:8px;">Work Email</label>
+        <input type="email" id="hd-email" name="email" required placeholder="jane@yourdomain.com"
+          style="width:100%; background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:14px 16px; font-family:'Manrope',sans-serif; font-size:15px; color:var(--text); outline:none; transition:border-color .2s;"
+          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+        <p id="hd-email-error" style="display:none; margin-top:6px; font-size:12px; color:#ff4444; font-family:'DM Mono',monospace;">Please use your corporate email address.</p>
+      </div>
+
+      <div>
+        <label for="hd-message" style="display:block; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--text-sub); margin-bottom:8px;">What brings you here?</label>
+        <textarea id="hd-message" name="message" required rows="4" placeholder="Tell us about your organization, your role, and what you&rsquo;re trying to solve."
+          style="width:100%; background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:14px 16px; font-family:'Manrope',sans-serif; font-size:15px; color:var(--text); outline:none; resize:vertical; transition:border-color .2s; min-height:96px;"
+          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+      </div>
+
+      <div>
+        <button type="submit" id="hd-submit-btn"
+          style="background:var(--accent); color:#000; border:none; border-radius:8px; padding:16px 40px; font-family:'Manrope',sans-serif; font-size:16px; font-weight:700; cursor:pointer; letter-spacing:.01em; transition:opacity .2s, transform .2s; display:inline-block;">
+          Send &rarr;
+        </button>
+      </div>
+
+    </form>
+
+    <!-- Success message — hidden until submission -->
+    <div id="hd-success" style="display:none; padding:40px; background:rgba(0,102,255,0.08); border:1px solid rgba(0,102,255,0.25); border-radius:12px; text-align:center;">
+      <div style="font-size:28px; margin-bottom:16px;">&#10003;</div>
+      <div style="font-size:18px; font-weight:600; color:var(--text); margin-bottom:10px;">Message received.</div>
+      <div style="font-size:15px; color:var(--text-dim); line-height:1.6;">All submissions are reviewed. Qualified inquiries receive a direct response.</div>
+    </div>
+
   </div>
 </section>
+
+<script>
+  // ── CONTACT FORM: corporate email validation + Netlify async submit ──
+  const CONSUMER_DOMAINS = new Set([
+    'gmail.com','yahoo.com','hotmail.com','outlook.com','icloud.com',
+    'protonmail.com','aol.com','mail.com','ymail.com','live.com',
+    'msn.com','me.com','mac.com','googlemail.com','hey.com'
+  ]);
+
+  function isCorporateEmail(email) {
+    const domain = email.split('@')[1];
+    return domain && !CONSUMER_DOMAINS.has(domain.toLowerCase());
+  }
+
+  const form    = document.getElementById('hd-contact-form');
+  const success = document.getElementById('hd-success');
+  const emailInput  = document.getElementById('hd-email');
+  const emailError  = document.getElementById('hd-email-error');
+  const submitBtn   = document.getElementById('hd-submit-btn');
+
+  emailInput.addEventListener('blur', () => {
+    if (emailInput.value && !isCorporateEmail(emailInput.value)) {
+      emailError.style.display = 'block';
+      emailInput.style.borderColor = '#ff4444';
+    } else {
+      emailError.style.display = 'none';
+      emailInput.style.borderColor = 'var(--border)';
+    }
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!isCorporateEmail(emailInput.value)) {
+      emailError.style.display = 'block';
+      emailInput.style.borderColor = '#ff4444';
+      emailInput.focus();
+      return;
+    }
+    submitBtn.textContent = 'Sending…';
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '.6';
+    try {
+      const data = new FormData(form);
+      await fetch('/', { method: 'POST', headers: {'Content-Type':'application/x-www-form-urlencoded'}, body: new URLSearchParams(data).toString() });
+      form.style.display = 'none';
+      success.style.display = 'block';
+    } catch(err) {
+      submitBtn.textContent = 'Send →';
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = '1';
+      alert('Something went wrong. Please try again or email us directly.');
+    }
+  });
+</script>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
-      <img src="" alt="Human &amp; Digital" id="footer-logo" style="height:36px;">
+      <img src="/images/hd-logo-white.webp" alt="Human &amp; Digital" id="footer-logo" style="height:36px;">
       <p>Human &amp; Digital, Inc. builds identity infrastructure for the global media supply chain. The commercial force behind HAND &mdash; The Universal Talent Identifier.</p>
       <p class="footer-manifesto">&ldquo;Standards are how values endure. Infrastructure is how ethics scale.&rdquo;</p>
     </div>
     <div class="footer-col">
       <h4>Services</h4>
       <ul>
+        <li><a href="services.html#identity-intelligence">Identity Intelligence</a></li>
+        <li><a href="services.html#hand-id-registration">HAND ID Registration</a></li>
+        <li><a href="services.html#meta-tagging">Meta-Tagging &amp; Data Labeling</a></li>
+        <li><a href="services.html#data-transformation">Data Transformation</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>Company</h4>
       <ul>
         <li><a href="hand-standard.html">The HAND Standard</a></li>
-        <li><a href="investor-relations.html">Inquire</a></li>
+        <li><a href="#contact">Let&rsquo;s Talk</a></li>
       </ul>
     </div>
     <div class="footer-col">
