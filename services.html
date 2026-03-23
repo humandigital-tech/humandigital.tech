@@ -155,6 +155,61 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:32px 48px
 @media(max-width:640px){
   .benefits-grid,.cap-grid,.drivers-grid{grid-template-columns:1fr;}
 }
+
+  /* ── HAMBURGER NAV (mobile) ── */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: rgba(255,255,255,0.8);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    border-radius: 2px;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-mobile-menu {
+    display: none;
+    position: fixed;
+    top: 64px;
+    left: 0; right: 0;
+    background: rgba(10,10,10,0.98);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    z-index: 199;
+    padding: 16px 24px 24px;
+    backdrop-filter: blur(16px);
+  }
+  .nav-mobile-menu.open { display: block; }
+  .nav-mobile-menu ul {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .nav-mobile-menu ul li a {
+    display: block;
+    padding: 14px 0;
+    font-size: 17px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    transition: color 0.2s;
+  }
+  .nav-mobile-menu ul li:last-child a { border-bottom: none; }
+  .nav-mobile-menu ul li a:hover { color: #fff; }
+  .nav-mobile-menu ul li a.nav-cta {
+    color: var(--accent);
+    font-weight: 600;
+  }
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-400F6Q6CXT"></script>
@@ -182,7 +237,19 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:32px 48px
     <li><a href="investor-relations.html">Investors</a></li>
     <li><a href="#contact" class="nav-cta">Let&rsquo;s Talk</a></li>
   </ul>
+  <button class="nav-hamburger" id="hd-sub-hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="nav-mobile-menu" id="hd-sub-mobile-menu">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="hand-standard.html">The HAND Standard</a></li>
+    <li><a href="investor-relations.html">Investors</a></li>
+    <li><a href="#contact" class="nav-cta">Let&rsquo;s Talk</a></li>
+  </ul>
+</div>
 
 <div class="service-nav" style="margin-top:64px;">
   <a href="#s01" class="service-nav-link">01 &mdash; Identity Intelligence</a>
@@ -621,6 +688,22 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:32px 48px
     entries.forEach(e => {
       if(e.isIntersecting) {
         navLinks.forEach(l =
+</script>
+
+<script>
+  // ── HAMBURGER NAV ──
+  const burger = document.getElementById('hd-sub-hamburger');
+  const mobileMenu = document.getElementById('hd-sub-mobile-menu');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      burger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
+  });
 </script>
 </body>
 </html>
