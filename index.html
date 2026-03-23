@@ -467,47 +467,7 @@
   .footer-hand-link:hover { text-decoration: underline; }
 
   /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    nav { padding: 0 24px; }
-    .nav-links { display: none; }
-    .nav-hamburger { display: flex; }
-    section, .hero { padding-left: 24px; padding-right: 24px; }
-    .hero {
-      grid-template-columns: 1fr;
-      grid-template-rows: auto auto;
-      min-height: auto;
-      padding: 80px 24px 48px;
-    }
-    .hero-content { grid-column: 1; grid-row: 1; }
-    .hero-image-wrap {
-      grid-column: 1; grid-row: 2;
-      margin-top: 40px;
-      max-width: 100%;
-    }
-    .hero-image-wrap img { max-width: 100%; }
-    .bridge-inner, .manifesto-inner { grid-template-columns: 1fr; gap: 40px; }
-    .footer-top { grid-template-columns: 1fr 1fr; }
-    .hero-stats { display: none; }
-    .standards { padding: 32px 24px; }
-    footer { padding: 48px 24px 32px; }
-  }
-  .tam-beat {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px; font-weight: 500;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: rgba(255,255,255,0.35); margin-bottom: 20px;
-    transition: color 0.4s ease, letter-spacing 0.4s ease, text-shadow 0.4s ease;
-    cursor: default; display: inline-block;
-  }
-  .tam-beat:hover {
-    color: rgba(255,255,255,0.85);
-    letter-spacing: 0.18em;
-    text-shadow: 0 0 20px rgba(0,102,255,0.6), 0 0 40px rgba(0,102,255,0.25);
-  }
-  @media (max-width: 640px) {
-    .tam-beat:hover { letter-spacing: 0.12em; }
-  }
-
+  
   /* ── HAMBURGER NAV (mobile) ── */
   .nav-hamburger {
     display: none;
@@ -561,6 +521,47 @@
   .nav-mobile-menu ul li a.nav-cta {
     color: var(--accent);
     font-weight: 600;
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    section, .hero { padding-left: 24px; padding-right: 24px; }
+    .hero {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+      min-height: auto;
+      padding: 80px 24px 48px;
+    }
+    .hero-content { grid-column: 1; grid-row: 1; }
+    .hero-image-wrap {
+      grid-column: 1; grid-row: 2;
+      margin-top: 40px;
+      max-width: 100%;
+    }
+    .hero-image-wrap img { max-width: 100%; }
+    .bridge-inner, .manifesto-inner { grid-template-columns: 1fr; gap: 40px; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .hero-stats { display: none; }
+    .standards { padding: 32px 24px; }
+    footer { padding: 48px 24px 32px; }
+  }
+  .tam-beat {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.35); margin-bottom: 20px;
+    transition: color 0.4s ease, letter-spacing 0.4s ease, text-shadow 0.4s ease;
+    cursor: default; display: inline-block;
+  }
+  .tam-beat:hover {
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 0.18em;
+    text-shadow: 0 0 20px rgba(0,102,255,0.6), 0 0 40px rgba(0,102,255,0.25);
+  }
+  @media (max-width: 640px) {
+    .tam-beat:hover { letter-spacing: 0.12em; }
   }
 
 </style>

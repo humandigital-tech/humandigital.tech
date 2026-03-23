@@ -115,15 +115,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:32px 48px
 .footer-hand-link{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);text-decoration:none;}
 .footer-hand-link:hover{text-decoration:underline;}
 
-@media(max-width:900px){
-  nav{padding:0 24px;}
-  .nav-links{display:none;}
-  .nav-hamburger{display:flex;}
-  .hero,.truths,.urgency,.contact{padding-left:24px;padding-right:24px;}
-  .truths-grid{grid-template-columns:1fr;}
-  .contact-wrap{grid-template-columns:1fr;gap:40px;}
-  footer{padding:32px 24px;}
-}
 
   /* ── HAMBURGER NAV (mobile) ── */
   .nav-hamburger {
@@ -179,6 +170,16 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:32px 48px
     color: var(--accent);
     font-weight: 600;
   }
+  @media(max-width:900px){
+  nav{padding:0 24px;}
+  .nav-links{display:none;}
+  .nav-hamburger{display:flex;}
+  .hero,.truths,.urgency,.contact{padding-left:24px;padding-right:24px;}
+  .truths-grid{grid-template-columns:1fr;}
+  .contact-wrap{grid-template-columns:1fr;gap:40px;}
+  footer{padding:32px 24px;}
+}
+
 </style>
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-400F6Q6CXT"></script>
@@ -479,19 +480,16 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:32px 48px
 
 <script>
   // ── HAMBURGER NAV ──
-  document.addEventListener('DOMContentLoaded', function() {
-    const burger = document.getElementById('hd-sub-hamburger');
-    const mobileMenu = document.getElementById('hd-sub-mobile-menu');
-    if (!burger || !mobileMenu) return;
-    burger.addEventListener('click', () => {
-      burger.classList.toggle('open');
-      mobileMenu.classList.toggle('open');
-    });
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        burger.classList.remove('open');
-        mobileMenu.classList.remove('open');
-      });
+  const burger = document.getElementById('hd-sub-hamburger');
+  const mobileMenu = document.getElementById('hd-sub-mobile-menu');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      burger.classList.remove('open');
+      mobileMenu.classList.remove('open');
     });
   });
 </script>
