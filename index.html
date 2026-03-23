@@ -477,6 +477,22 @@
     .standards { padding: 32px 24px; }
     footer { padding: 48px 24px 32px; }
   }
+  .tam-beat {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.35); margin-bottom: 20px;
+    transition: color 0.4s ease, letter-spacing 0.4s ease, text-shadow 0.4s ease;
+    cursor: default; display: inline-block;
+  }
+  .tam-beat:hover {
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 0.18em;
+    text-shadow: 0 0 20px rgba(0,102,255,0.6), 0 0 40px rgba(0,102,255,0.25);
+  }
+  @media (max-width: 640px) {
+    .tam-beat:hover { letter-spacing: 0.12em; }
+  }
 </style>
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-400F6Q6CXT"></script>
@@ -513,7 +529,7 @@
     <h1 class="hero-headline">
       <span style="display:block;">Identify.</span><span style="display:block;">Attribute.</span><span style="display:block;">Monetize.</span>
     </h1>
-    <div style="font-family:'DM Mono',monospace; font-size:11px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:20px;">Trust &nbsp;&middot;&nbsp; Automation &nbsp;&middot;&nbsp; Measurement</div>
+    <div class="tam-beat">Trust &nbsp;&middot;&nbsp; Automation &nbsp;&middot;&nbsp; Measurement</div>
     <p class="hero-sub">
       Human &amp; Digital delivers <span style="color:var(--accent); font-weight:600;">Identity Intelligence</span> and data services for notable public figures in Cultural Industries &mdash; Athletes, Actors, Creators, Producers, Directors, Musicians, Voice Artists, and both the legal likenesses and fictional characters they bring to life.
     </p>
@@ -601,8 +617,8 @@
   <!-- Clyde Smith pull quote -->
   <div class="reveal" style="max-width:780px; margin:56px auto 0; padding:0 48px 64px;">
     <div style="border-left:3px solid var(--accent); padding-left:28px;">
-      <p style="font-size:19px; font-weight:400; color:var(--text); line-height:1.65; font-style:italic; margin:0 0 16px;">&ldquo;If you can&rsquo;t identify it, you can&rsquo;t operationalize or measure it. If you can&rsquo;t measure it &mdash; you can&rsquo;t monetize it.&rdquo;</p>
-      <p style="font-family:'DM Mono',monospace; font-size:11px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-dim); margin:0;">Clyde Smith &nbsp;&middot;&nbsp; SVP, Advanced Technology &nbsp;&middot;&nbsp; Fox Network Engineering &amp; Operations</p>
+      <p style="font-size:19px; font-weight:400; color:var(--text); line-height:1.65; font-style:italic; margin:0 0 16px;">&ldquo;If you can&rsquo;t identify it, you can&rsquo;t operationalize or measure it.<br>If you can&rsquo;t measure it &mdash; you can&rsquo;t monetize it.&rdquo;</p>
+      <p style="font-family:'DM Mono',monospace; font-size:11px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-dim); margin:0;">Clyde Smith &nbsp;&middot;&nbsp; SMPTE Life Fellow &nbsp;&middot;&nbsp; Emmy Award Recipient &nbsp;&middot;&nbsp; IABM Honorary Member</p>
     </div>
   </div>
 
