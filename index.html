@@ -1084,16 +1084,19 @@
 
 <script>
   // ── HAMBURGER NAV ──
-  const hdHamburger = document.getElementById('hd-hamburger');
-  const hdMobileMenu = document.getElementById('hd-mobile-menu');
-  hdHamburger.addEventListener('click', () => {
-    hdHamburger.classList.toggle('open');
-    hdMobileMenu.classList.toggle('open');
-  });
-  hdMobileMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      hdHamburger.classList.remove('open');
-      hdMobileMenu.classList.remove('open');
+  document.addEventListener('DOMContentLoaded', function() {
+    const hdHamburger = document.getElementById('hd-hamburger');
+    const hdMobileMenu = document.getElementById('hd-mobile-menu');
+    if (!hdHamburger || !hdMobileMenu) return;
+    hdHamburger.addEventListener('click', () => {
+      hdHamburger.classList.toggle('open');
+      hdMobileMenu.classList.toggle('open');
+    });
+    hdMobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hdHamburger.classList.remove('open');
+        hdMobileMenu.classList.remove('open');
+      });
     });
   });
 </script>
