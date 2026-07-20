@@ -239,6 +239,10 @@
     font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
     text-transform: uppercase; color: var(--text-sub); margin-top: 4px;
   }
+  .hero-stat-sub {
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    color: var(--text-sub); opacity: 0.6; margin-top: 3px; letter-spacing: 0.04em;
+  }
 
   /* ── STANDARDS BAR ── */
   .standards {
@@ -549,7 +553,8 @@
     .hero-image-wrap img { max-width: 100%; }
     .bridge-inner, .manifesto-inner { grid-template-columns: 1fr; gap: 40px; }
     .footer-top { grid-template-columns: 1fr 1fr; }
-    .hero-stats { display: none; }
+    .hero-stats { flex-wrap: wrap; gap: 28px; margin-top: 32px; }
+    .hero-stat-num { font-size: 26px; }
     .standards { padding: 32px 24px; }
     footer { padding: 48px 24px 32px; }
   }
@@ -677,6 +682,7 @@
       <div class="hero-stat-item">
         <div class="hero-stat-num" data-hand-ticker="k" data-count="145" data-suffix="K+">145K+</div>
         <div class="hero-stat-label">IDs Registered &middot; 10M+ Candidate Pool</div>
+        <div class="hero-stat-sub">Live count</div>
       </div>
       <div class="hero-stat-item">
         <div class="hero-stat-num">3B+</div>
@@ -878,7 +884,7 @@
       <div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--border);">
         <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-sub);margin-bottom:12px;">Registry Stats</div>
         <div style="display:flex;gap:32px;">
-          <div><div style="font-size:22px;font-weight:700;color:var(--text);" data-hand-ticker="k" data-count="145">145K+</div><div style="font-size:11px;color:var(--text-sub);margin-top:2px;">IDs Issued</div></div>
+          <div><div style="font-size:22px;font-weight:700;color:var(--text);" data-hand-ticker="k" data-count="145">145K+</div><div style="font-size:11px;color:var(--text-sub);margin-top:2px;">IDs Issued &middot; Live</div></div>
           <div><div style="font-size:22px;font-weight:700;color:var(--text);">3B+</div><div style="font-size:11px;color:var(--text-sub);margin-top:2px;">DOI Resolutions/Mo.</div></div>
           <div><div style="font-size:22px;font-weight:700;color:var(--text);">2022</div><div style="font-size:11px;color:var(--text-sub);margin-top:2px;">Founded</div></div>
         </div>
