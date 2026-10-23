@@ -533,6 +533,35 @@
     font-weight: 600;
   }
 
+
+  /* ── PROOF BAND ── */
+  .proof-band { padding:56px 48px; border-top:1px solid var(--border); }
+  .proof-inner { max-width:780px; margin:0 auto; text-align:center; }
+  .proof-text { font-size:17px; line-height:1.7; color:var(--text-dim); margin:12px 0 24px; }
+  @media (max-width: 640px) { .proof-band { padding:48px 20px; } }
+
+  /* ── CONTACT (restored) ── */
+  .contact-section { padding:64px 48px; background:var(--bg2); border-top:1px solid var(--border); }
+  .contact-inner { max-width:640px; margin:0 auto; }
+  .contact-lede { font-size:15px; color:var(--text-dim); line-height:1.7; margin-bottom:32px; }
+  .contact-form, .hd-gate-fields { display:flex; flex-direction:column; gap:20px; }
+  .hd-gate-fields[hidden] { display:none; }
+  .hd-label { display:block; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--text-sub); margin-bottom:8px; }
+  .hd-input { width:100%; background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:14px 16px; font-family:'Manrope',sans-serif; font-size:15px; color:var(--text); outline:none; transition:border-color .2s; }
+  .hd-input:focus { border-color:var(--accent); }
+  select.hd-input { appearance:auto; }
+  .hd-grid2 { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .hd-gate { border:0; padding:0; margin:0; display:flex; flex-direction:column; gap:10px; }
+  .hd-gate-opt { display:flex; gap:10px; align-items:flex-start; font-size:15px; color:var(--text); line-height:1.5; cursor:pointer; }
+  .hd-gate-opt input { margin-top:4px; accent-color:var(--accent); }
+  .hd-gate-talent { background:rgba(0,102,255,0.08); border:1px solid rgba(0,102,255,0.25); border-radius:10px; padding:20px 22px; font-size:14px; line-height:1.7; color:var(--text-dim); }
+  .hd-gate-talent strong { color:var(--text); }
+  .hd-gate-talent a, .hd-hint a { color:var(--accent); }
+  .hd-hint { font-size:12px; color:var(--text-sub); margin-top:8px; line-height:1.6; }
+  .hd-error { margin-top:6px; font-size:12px; color:#ff4444; font-family:'DM Mono',monospace; }
+  .hd-success { padding:40px; background:rgba(0,102,255,0.08); border:1px solid rgba(0,102,255,0.25); border-radius:12px; text-align:center; }
+  @media (max-width: 640px) { .contact-section { padding:56px 20px; } .hd-grid2 { grid-template-columns:1fr; } }
+
   @media (max-width: 900px) {
     nav { padding: 0 24px; }
     .nav-links { display: none; }
@@ -592,7 +621,7 @@
     "name": "Human & Digital, Inc.",
     "alternateName": ["H&D", "Human and Digital"],
     "url": "https://humandigital.tech",
-    "foundingDate": "2022-01-01",
+    "foundingDate": "2022-01-07",
     "description": "Human & Digital, Inc. (H&D) is a pre-seed Delaware C-Corp identity intelligence and data services platform. H&D delivers identity intelligence and data services for notable public figures in Cultural Industries — Athletes, Actors, Creators, Producers, Directors, Musicians, Voice Artists, and both the legal likenesses and fictional characters they bring to life.",
     "legalName": "Human & Digital, Inc.",
     "address": {
@@ -607,15 +636,9 @@
       "jobTitle": "Founder & CEO",
       "url": "https://www.linkedin.com/in/willkreth"
     },
-    "subOrganization": {
-      "@type": "Organization",
-      "name": "HAND – The Universal Talent Identifier",
-      "url": "https://hand-id.org"
-    },
     "sameAs": [
       "https://www.linkedin.com/company/human-and-digital/",
-      "https://www.crunchbase.com/organization/hand-human-digital",
-      "https://hand-id.org"
+      "https://www.crunchbase.com/organization/hand-human-digital"
     ],
     "knowsAbout": [
       "Identity Intelligence",
@@ -680,13 +703,13 @@
     </div>
     <div class="hero-stats">
       <div class="hero-stat-item">
-        <div class="hero-stat-num" data-hand-ticker="k" data-count="145" data-suffix="K+">145K+</div>
+        <div class="hero-stat-num" data-hand-ticker="k" data-count="2000">2.7M+</div>
         <div class="hero-stat-label">IDs Registered &middot; 10M+ Candidate Pool</div>
         <div class="hero-stat-sub">Live count</div>
       </div>
       <div class="hero-stat-item">
-        <div class="hero-stat-num">3B+</div>
-        <div class="hero-stat-label">DOI Resolutions / Month Globally</div>
+        <div class="hero-stat-num">3.5B+</div>
+        <div class="hero-stat-label">DOI Resolutions / Month &middot; Global DOI System</div>
       </div>
       <div class="hero-stat-item">
         <div class="hero-stat-num">ISO</div>
@@ -702,16 +725,17 @@
 <!-- STANDARDS BAR -->
 <div class="standards reveal">
   <div class="standards-inner">
-    <span class="standards-label">Standards &amp; Affiliations</span>
+    <span class="standards-label">HAND Memberships &amp; Standards</span>
     <div class="standards-divider"></div>
     <div class="standards-items">
       <a href="https://c2pa.org" target="_blank" rel="noopener" class="standard-item">C2PA</a>
       <a href="https://cawg.io" target="_blank" rel="noopener" class="standard-item">CAWG</a>
-      <a href="https://eidr.org" target="_blank" rel="noopener" class="standard-item">EIDR</a>
+      <a href="https://contentauthenticity.org" target="_blank" rel="noopener" class="standard-item">CAI</a>
       <a href="https://iptc.org" target="_blank" rel="noopener" class="standard-item">IPTC</a>
       <a href="https://www.thedpp.com" target="_blank" rel="noopener" class="standard-item">DPP</a>
       <a href="https://www.doi.org" target="_blank" rel="noopener" class="standard-item">DOI Foundation</a>
       <a href="https://www.iso.org/standard/88862.html" target="_blank" rel="noopener" class="standard-item">ISO 26324:2025</a>
+      <a href="https://hand-id.org/#membership" class="standard-item">SMPTE Metadata Registry</a>
     </div>
   </div>
 </div>
@@ -721,13 +745,13 @@
   <div class="serve-intro reveal">
     <div class="section-label">Who We Serve</div>
     <h2 class="section-title">The Cultural Industries &mdash; in full</h2>
-    <p>HAND IDs are not for corporate HR pipelines or recruitment funnels. They are career-long, globally unique identifiers for notable public figures who drive cultural value. Our scope spans every corner of the Cultural Industries &mdash; from major professional leagues and their player associations, to NCAA D1 compliance, to the global guild and union ecosystem across film, television, and music.</p>
+    <p>HAND IDs are not for corporate HR pipelines or recruitment funnels. They are career-long, globally unique identifiers for notable public figures who drive cultural value. Our scope spans every corner of the Cultural Industries &mdash; from major professional leagues and their player associations, to NCAA athletic compliance, to the global guild and union ecosystem across film, television, and music.</p>
   </div>
   <div class="serve-grid">
     <div class="serve-card reveal reveal-delay-1">
       <div class="serve-icon">&#127942;</div>
       <div class="serve-name">Sports</div>
-      <div class="serve-desc">Professional athletes, coaches, and broadcasters across major leagues and federations globally &mdash; plus player associations, NCAA D1 compliance departments, and sports labor organizations navigating NIL, CBA negotiations, and career-long identity management.</div>
+      <div class="serve-desc">Professional athletes, coaches, and broadcasters across major leagues and federations globally &mdash; plus player associations, NCAA athletic compliance departments, and sports labor organizations navigating NIL, CBA negotiations, and career-long identity management.</div>
     </div>
     <div class="serve-card reveal reveal-delay-2">
       <div class="serve-icon">&#127916;</div>
@@ -826,11 +850,11 @@
     <div class="manifesto-stakes reveal reveal-delay-2">
       <div class="stake-item">
         <div class="stake-label">Force 01 &mdash; Legislative</div>
-        <div class="stake-text">CA AB 1836, AB 2602, NY S.8420-A, and the federal NO FAKES Act create structural economic incentive for studios, platforms, and agencies to adopt verifiable talent IDs. This is not anticipated regulation &mdash; it is active law.</div>
+        <div class="stake-text">EU AI Act Article 50 transparency duties, California&rsquo;s AI Transparency Act (AB 853, phasing in from January 1, 2027), CA AB 1836 and AB 2602, and NY S.8420-A are on the books &mdash; and the federal NO FAKES Act remains in play in Congress. Together they create structural incentive for studios, platforms, and agencies to adopt verifiable talent IDs.</div>
       </div>
       <div class="stake-item">
         <div class="stake-label">Force 02 &mdash; Labor &amp; CBA</div>
-        <div class="stake-text">SAG-AFTRA/AMPTP 2026 negotiations, MLBPA/MLB CBA expiration (December 2026), and active player association engagement across NFL, NBA, NHL, and international federations create an urgent need for neutral, portable talent identifiers.</div>
+        <div class="stake-text">The newly ratified SAG-AFTRA TV/Theatrical contract, the expiring MLB&ndash;MLBPA agreement, and player-association engagement across the NFL, NBA, NHL, and international federations put likeness consent and AI-use terms at the bargaining table &mdash; and every one of those terms needs a neutral, portable way to say <em>who</em>.</div>
       </div>
       <div class="stake-item">
         <div class="stake-label">Force 03 &mdash; AI Provenance</div>
@@ -838,12 +862,21 @@
       </div>
       <div class="stake-item">
         <div class="stake-label">Force 04 &mdash; NCAA NIL</div>
-        <div class="stake-text">The NCAA NIL era has created an identity verification and compliance infrastructure gap across D1 athletic departments &mdash; with thousands of student athletes requiring verifiable, portable identity credentials for endorsement and licensing.</div>
+        <div class="stake-text">The NCAA NIL era has created an identity verification and compliance infrastructure gap across college athletic departments &mdash; with hundreds of thousands of student athletes requiring verifiable, portable identity credentials for endorsement and licensing.</div>
       </div>
     </div>
   </div>
   <div style="text-align:center; margin-top:48px; padding-bottom:8px;" class="reveal">
     <a href="#contact" class="btn-primary" style="font-size:15px;">The window is open. Let&rsquo;s Talk &rarr;</a>
+  </div>
+</section>
+
+<!-- PROOF: IBC 2024 -->
+<section class="proof-band reveal">
+  <div class="proof-inner">
+    <div class="section-label">Proof in Practice &middot; IBC Accelerator 2024</div>
+    <p class="proof-text">At IBC 2024 in Amsterdam, an IBC Accelerator project proposed and led by HAND created a working chain of custody for a consented human likeness &mdash; from 3D capture to distribution. C2PA Content Credentials named the content by its EIDR ID and the talent by its HAND ID.</p>
+    <a href="https://hand-id.org/ibc-2024" class="btn-ghost">Watch the story on hand-id.org &#8599;</a>
   </div>
 </section>
 
@@ -860,7 +893,7 @@
       <h2 class="section-title">Human &amp; Digital founded<br>HAND. They are distinct entities.</h2>
       <p class="bridge-body">
         <strong>Human &amp; Digital, Inc.</strong> is the for-profit media technology company that conceived, developed, and commercializes services built on the HAND identifier ecosystem.<br><br>
-        <strong>HAND &mdash; The Universal Talent Identifier</strong> is an independent Delaware non-stock, nonprofit C corporation and 501(c)(6) trade association and standards body. It maintains the identifier registry, sets governance policy, and operates in the public interest of talent across cultural industries.<br><br>
+        <strong>HAND &mdash; The Universal Talent Identifier</strong> is an independent Delaware non-stock, nonprofit corporation and standards body (501(c)(6) application pending). It maintains the identifier registry, sets governance policy, and operates in the public interest of talent across cultural industries.<br><br>
         This structure is intentional. A neutral, nonprofit-governed standard earns broader adoption across competing commercial interests. H&amp;D&rsquo;s commercial services create the sustainable infrastructure that makes that standard viable in practice.
       </p>
       <a href="https://hand-id.org" class="bridge-cta">Visit hand-id.org &#8599;</a>
@@ -884,8 +917,8 @@
       <div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--border);">
         <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-sub);margin-bottom:12px;">Registry Stats</div>
         <div style="display:flex;gap:32px;">
-          <div><div style="font-size:22px;font-weight:700;color:var(--text);" data-hand-ticker="k" data-count="145">145K+</div><div style="font-size:11px;color:var(--text-sub);margin-top:2px;">IDs Issued &middot; Live</div></div>
-          <div><div style="font-size:22px;font-weight:700;color:var(--text);">3B+</div><div style="font-size:11px;color:var(--text-sub);margin-top:2px;">DOI Resolutions/Mo.</div></div>
+          <div><div style="font-size:22px;font-weight:700;color:var(--text);" data-hand-ticker="k" data-count="2000">2.7M+</div><div style="font-size:11px;color:var(--text-sub);margin-top:2px;">IDs Issued &middot; Live</div></div>
+          <div><div style="font-size:22px;font-weight:700;color:var(--text);">3.5B+</div><div style="font-size:11px;color:var(--text-sub);margin-top:2px;">DOI System Resolutions/Mo.</div></div>
           <div><div style="font-size:22px;font-weight:700;color:var(--text);">2022</div><div style="font-size:11px;color:var(--text-sub);margin-top:2px;">Founded</div></div>
         </div>
       </div>
@@ -913,7 +946,7 @@
     <div class="team-card reveal reveal-delay-2">
       <div class="team-avatar">JC</div>
       <div class="team-name">John Carlucci</div>
-      <div class="team-role">CTO</div>
+      <div class="team-role">Acting CTO</div>
       <div class="team-bio">Ex-Sony &middot; Clearleap (IBM) &middot; 31 Patents &middot; Media supply-chain, DRM, AI &amp; identity systems &middot; MSEE, Cornell</div>
       <a href="https://www.linkedin.com/in/jbcarlucci/" target="_blank" class="team-linkedin">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
@@ -921,6 +954,16 @@
       </a>
     </div>
     <div class="team-card reveal reveal-delay-3">
+      <div class="team-avatar">JA</div>
+      <div class="team-name">Joey Anuff</div>
+      <div class="team-role">Lead Agentic Developer</div>
+      <div class="team-bio">Co-founder, Critical Metrics (with Will Kreth) &middot; HotWired &middot; Co-founder, Suck.com &middot; AI developer, Office of Reid Hoffman &middot; VH1 series development &middot; Co-author, <em>Dumb Money</em></div>
+      <a href="https://www.linkedin.com/in/joeyanuff/" target="_blank" class="team-linkedin">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+    <div class="team-card reveal reveal-delay-4">
       <div class="team-avatar">GB</div>
       <div class="team-name">Gabriel Berger</div>
       <div class="team-role">CCO</div>
@@ -985,6 +1028,80 @@
   </div>
 </section>
 
+<!-- CONTACT FORM (restored 2026-10-23 — section was dropped by accident in the May 21 "pill fixes" commit) -->
+<section id="contact" class="contact-section">
+  <div class="contact-inner">
+
+    <div class="section-label reveal">Get In Touch</div>
+    <h2 class="section-title reveal" style="margin-bottom:16px;">Let&rsquo;s Talk</h2>
+    <p class="reveal contact-lede">Human &amp; Digital is a business-to-business company. We work with studios, leagues, agencies, guilds, platforms, and technology partners that are serious about identity infrastructure. Tell us who you are and what brought you here.</p>
+
+    <form name="hd-contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="hd-contact-form" class="contact-form">
+      <input type="hidden" name="form-name" value="hd-contact">
+      <p style="display:none;"><label>Don&rsquo;t fill this out: <input name="bot-field"></label></p>
+
+      <fieldset class="hd-gate">
+        <legend class="hd-label">Are you contacting us on behalf of an organization?</legend>
+        <label class="hd-gate-opt"><input type="radio" name="inquiry_type" value="organization" required> Yes &mdash; I represent a company, league, guild, agency, or platform</label>
+        <label class="hd-gate-opt"><input type="radio" name="inquiry_type" value="individual"> No &mdash; I&rsquo;m an individual (e.g. asking about my own HAND ID)</label>
+      </fieldset>
+
+      <div class="hd-gate-talent" id="hd-gate-talent" hidden>
+        <strong>Thanks for reaching out &mdash; this form isn&rsquo;t the right path for individuals.</strong><br>
+        Human &amp; Digital doesn&rsquo;t offer consumer services or support, and HAND doesn&rsquo;t register people directly. HAND IDs are issued from independent public record, and the organizations that represent talent work with HAND on their behalf. <strong>Ask your agent, manager, guild, union, or league to get in touch.</strong> Looking up any HAND ID is free at <a href="https://registry.hand-id.org" target="_blank" rel="noopener">registry.hand-id.org</a>, and more about the standard is at <a href="https://hand-id.org">hand-id.org</a>.
+      </div>
+
+      <div class="hd-gate-fields" id="hd-gate-fields">
+        <div class="hd-grid2">
+          <div>
+            <label for="hd-name" class="hd-label">Full Name</label>
+            <input type="text" id="hd-name" name="name" required placeholder="Jane Smith" class="hd-input">
+          </div>
+          <div>
+            <label for="hd-org" class="hd-label">Organization</label>
+            <input type="text" id="hd-org" name="organization" required placeholder="Acme Studios" class="hd-input">
+          </div>
+        </div>
+
+        <div>
+          <label for="hd-email" class="hd-label">Work Email</label>
+          <input type="email" id="hd-email" name="email" required placeholder="jane@yourdomain.com" class="hd-input">
+          <p id="hd-email-error" class="hd-error" style="display:none;">Please use your corporate email address.</p>
+        </div>
+
+        <div>
+          <label for="hd-interest" class="hd-label">Area of interest</label>
+          <select id="hd-interest" name="interest" class="hd-input">
+            <option value="identity-intelligence">Identity Intelligence</option>
+            <option value="hand-id-registration">HAND ID registration services</option>
+            <option value="meta-tagging">Meta-Tagging &amp; Data Labeling</option>
+            <option value="data-transformation">Data Transformation</option>
+            <option value="partnership">Partnership / integration</option>
+            <option value="other">Something else</option>
+          </select>
+          <p class="hd-hint">Investors: please use the <a href="investor-relations.html">Investor Relations</a> page. Membership in the HAND standards body is handled at <a href="https://hand-id.org/#join">hand-id.org</a>.</p>
+        </div>
+
+        <div>
+          <label for="hd-message" class="hd-label">What brings you here?</label>
+          <textarea id="hd-message" name="message" required rows="4" placeholder="Tell us about your organization, your role, and what you&rsquo;re trying to solve." class="hd-input" style="resize:vertical; min-height:96px;"></textarea>
+        </div>
+
+        <div>
+          <button type="submit" id="hd-submit-btn" class="btn-primary" style="border:none; cursor:pointer; font-size:16px;">Send &rarr;</button>
+        </div>
+      </div>
+    </form>
+
+    <div id="hd-success" class="hd-success" style="display:none;">
+      <div style="font-size:28px; margin-bottom:16px;">&#10003;</div>
+      <div style="font-size:18px; font-weight:600; color:var(--text); margin-bottom:10px;">Message received.</div>
+      <div style="font-size:15px; color:var(--text-dim); line-height:1.6;">All submissions are reviewed. Qualified business inquiries receive a direct response.</div>
+    </div>
+
+  </div>
+</section>
+
 <script>
   // ── CONTACT FORM: corporate email validation + Netlify async submit ──
   const CONSUMER_DOMAINS = new Set([
@@ -1005,18 +1122,31 @@
   const submitBtn   = document.getElementById('hd-submit-btn');
 
   if (form && emailInput) {
+  // Soft gate: organizations proceed; individuals see the talent lane
+  const gateFields = document.getElementById('hd-gate-fields');
+  const gateTalent = document.getElementById('hd-gate-talent');
+  form.querySelectorAll('input[name="inquiry_type"]').forEach(r => {
+    r.addEventListener('change', () => {
+      if (!r.checked) return;
+      const isOrg = r.value === 'organization';
+      gateFields.hidden = !isOrg;
+      gateTalent.hidden = isOrg;
+    });
+  });
   emailInput.addEventListener('blur', () => {
     if (emailInput.value && !isCorporateEmail(emailInput.value)) {
       emailError.style.display = 'block';
       emailInput.style.borderColor = '#ff4444';
     } else {
       emailError.style.display = 'none';
-      emailInput.style.borderColor = 'var(--border)';
+      emailInput.style.borderColor = '';
     }
   });
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const gate = form.querySelector('input[name="inquiry_type"]:checked');
+    if (!gate || gate.value !== 'organization') { if (gate) gateTalent.hidden = false; return; }
     if (!isCorporateEmail(emailInput.value)) {
       emailError.style.display = 'block';
       emailInput.style.borderColor = '#ff4444';
@@ -1035,7 +1165,7 @@
       submitBtn.textContent = 'Send →';
       submitBtn.disabled = false;
       submitBtn.style.opacity = '1';
-      alert('Something went wrong. Please try again or email us directly.');
+      emailError.textContent = 'Something went wrong sending your message. Please try again.'; emailError.style.display = 'block';
     }
   });
   } // end null guard
